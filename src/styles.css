@@ -1,1 +1,26 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #11001c;
+  color: #fef8f8;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  line-height: 1.5;
+}
+
+hero {
+  width: 100%;
+}
+
+editor-canvas {
+  padding: 1rem;
+  display: block;
+  width: 100%;
+  max-width: 500px;
+  height: 80svh;
+  margin: 0 auto;
+}
