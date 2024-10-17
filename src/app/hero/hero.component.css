@@ -1,0 +1,29 @@
+.hero {
+  width: 100%;
+}
+
+.hero-image {
+  display: block;
+  width: 100%;
+  max-width: 700px;
+  height: 15rem;
+  object-fit: cover;
+}
+
+.hero-text {
+  padding: 3rem;
+  text-align: center;
+}
+
+.hero-button {
+  display: block;
+  margin: 0 auto;
+  padding: 0.8rem 2rem;
+  background: #3a015c;
+  color: #fef8f8;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: 700;
+}
