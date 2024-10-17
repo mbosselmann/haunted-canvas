@@ -1,5 +1,7 @@
 .hero {
   width: 100%;
+  display: grid;
+  gap: 3rem;
 }
 
 .hero-image {
@@ -11,13 +13,16 @@
 }
 
 .hero-text {
-  padding: 3rem;
+  justify-self: center;
+  max-width: 18rem;
   text-align: center;
 }
 
 .hero-button {
-  display: block;
-  margin: 0 auto;
+  justify-self: center;
+  min-width: 10rem;
+  width: 50%;
+  max-width: 15rem;
   padding: 0.8rem 2rem;
   background: #3a015c;
   color: #fef8f8;
