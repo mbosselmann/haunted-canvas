@@ -1,5 +1,11 @@
-<main>
-  <h1>{{ title }}</h1>
+<main class="main">
+  <header class="header">
+    <img width="40" height="40" [src]="greenEyeUrl" alt="" />
+    <h1 class="headline">{{ title }}</h1>
+    <img width="40" height="40" [src]="greenEyeUrl" alt="" />
+  </header>
+  <hero />
+  <editor />
 </main>
 
 <router-outlet />
