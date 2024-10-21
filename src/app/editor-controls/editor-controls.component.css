@@ -1,0 +1,19 @@
+.editor-controls {
+  display: grid;
+  height: 100%;
+  grid-template-rows: 21fr 1fr;
+}
+
+ul {
+  list-style: none;
+  display: flex;
+  padding-left: 0;
+  justify-content: space-between;
+}
+
+li {
+  padding: 1rem;
+  width: 100%;
+  display: grid;
+  place-items: center;
+}
