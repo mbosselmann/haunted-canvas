@@ -1,1 +1,20 @@
-<editor-canvas />
+<div class="grid">
+  <header class="editor-header">
+    <div class="editor-header-left">
+      <img width="30" height="30" [src]="greenEyeUrl" alt="" />
+      <h1 class="editor-headline">{{ title }}</h1>
+    </div>
+    <button type="button" class="header-button" (click)="onCloseEditor()">
+      <img
+        class="button-icon"
+        width="40"
+        height="40"
+        [src]="closeIconUrl"
+        alt=""
+      />
+      <span class="sr-only">Close Editor</span>
+    </button>
+  </header>
+  <editor-canvas />
+  <editor-controls />
+</div>

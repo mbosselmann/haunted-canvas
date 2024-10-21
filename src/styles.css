@@ -10,17 +10,19 @@ body {
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   line-height: 1.5;
+  display: grid;
+  place-items: center;
+  height: 100svh;
+}
+
+app-root {
+  width: 100%;
 }
 
 hero {
   width: 100%;
 }
 
-editor-canvas {
-  padding: 1rem;
-  display: block;
-  width: 100%;
-  max-width: 500px;
-  height: 80svh;
-  margin: 0 auto;
+h1 {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
