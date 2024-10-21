@@ -4,14 +4,27 @@
   grid-template-rows: 21fr 1fr;
 }
 
-ul {
+.editor-controls-section {
   list-style: none;
   display: flex;
   padding-left: 0;
   justify-content: space-between;
 }
 
-li {
+.slider {
+  overflow: hidden;
+  overflow-x: scroll;
+}
+
+.option-button {
+  min-width: 10rem;
+}
+
+.editor-controls-button {
+  background: #3a015c90;
+  color: #fef8f8;
+  border: none;
+  cursor: pointer;
   padding: 1rem;
   width: 100%;
   display: grid;

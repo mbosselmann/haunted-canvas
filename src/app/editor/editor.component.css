@@ -1,7 +1,7 @@
 .grid {
   display: grid;
   height: 100svh;
-  grid-template-rows: 4rem auto 12rem;
+  grid-template-rows: 4rem auto 10rem;
 }
 
 @media (min-width: 500px) {

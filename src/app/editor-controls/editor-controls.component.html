@@ -1,14 +1,24 @@
 <section class="editor-controls">
-  <ul>
-    <li>Settings</li>
-    <li>Filter</li>
-    <li>Sticker</li>
-    <li>Save</li>
-  </ul>
-  <ul>
-    <li>Settings</li>
-    <li>Filter</li>
-    <li>Sticker</li>
-    <li>Save</li>
-  </ul>
+  <div class="editor-controls-section slider">
+    @for (option of categoryOptions[selectedCategory]; track option.id){
+    <button
+      type="button"
+      class="editor-controls-button option-button"
+      (click)="onSelectOption(option.name)"
+    >
+      {{ option.name }}
+    </button>
+    }
+  </div>
+  <div class="editor-controls-section">
+    @for (category of categories; track category) {
+    <button
+      type="button"
+      class="editor-controls-button"
+      (click)="onSelectCategory(category)"
+    >
+      {{ category }}
+    </button>
+    }
+  </div>
 </section>
