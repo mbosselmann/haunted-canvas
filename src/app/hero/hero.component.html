@@ -1,8 +1,13 @@
+<header class="hero-header">
+  <img width="40" height="40" [src]="greenEyeUrl" alt="" />
+  <h1>{{ title }}</h1>
+  <img width="40" height="40" [src]="greenEyeUrl" alt="" />
+</header>
 <section class="hero">
   <img class="hero-image" width="300" height="300" [src]="imageUrl" alt="" />
   <p class="hero-text">
     Do you want to add some spooky effects to your images? <br />
     Try out the Haunted Canvas and add some ghostly magic. ✨
   </p>
-  <button class="hero-button" (click)="navigateToEditor()">Let's start!</button>
+  <button class="hero-button" (click)="onStartEditor()">Let's start!</button>
 </section>

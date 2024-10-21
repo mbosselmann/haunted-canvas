@@ -12,6 +12,9 @@ import { HeroComponent } from './hero/hero.component';
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  title: string = 'Haunted Canvas';
-  greenEyeUrl: string = 'assets/green-eye.png';
+  isEditorOpen: boolean = true;
+
+  toggleEditor(isEditorOpen: boolean): void {
+    this.isEditorOpen = isEditorOpen;
+  }
 }

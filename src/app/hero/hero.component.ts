@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'hero',
@@ -8,12 +8,14 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrl: './hero.component.css',
 })
 export class HeroComponent {
+  title: string = 'Haunted Canvas';
+  greenEyeUrl: string = 'assets/green-eye.png';
   imageUrl: string = 'assets/hero-image.webp';
 
   @Output()
-  heroButtonClicked = new EventEmitter<string>();
+  startEditor = new EventEmitter<boolean>();
 
-  navigateToEditor() {
-    console.log('clicked');
+  onStartEditor() {
+    this.startEditor.emit(true);
   }
 }
