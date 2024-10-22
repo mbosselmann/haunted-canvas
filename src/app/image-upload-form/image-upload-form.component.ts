@@ -28,8 +28,7 @@ export class ImageUploadComponent {
 
     if (!input.files?.[0]) return;
     const previewImageUrl = URL.createObjectURL(input.files?.[0]);
-    console.log(previewImageUrl);
-    console.log('File changed!');
+
     this.onImageIsChosen.emit(true);
     this.setPreviewImage.emit(previewImageUrl);
   }
