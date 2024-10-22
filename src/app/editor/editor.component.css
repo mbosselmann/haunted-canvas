@@ -57,6 +57,7 @@
 }
 
 editor-canvas {
+  background: #11001c;
   display: grid;
   place-items: center;
 }
