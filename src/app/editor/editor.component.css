@@ -55,3 +55,8 @@
   white-space: nowrap;
   border-width: 0;
 }
+
+editor-canvas {
+  display: grid;
+  place-items: center;
+}

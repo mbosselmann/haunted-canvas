@@ -15,6 +15,13 @@
       <span class="sr-only">Close Editor</span>
     </button>
   </header>
-  <editor-canvas />
+  @if (isImageChosen) {
+  <editor-canvas [previewImage]="previewImage" />
+  } @else {
+  <image-upload
+    (setPreviewImage)="setPreviewImage($event)"
+    (onImageIsChosen)="onImageChosen(true)"
+  />
+  }
   <editor-controls />
 </div>
