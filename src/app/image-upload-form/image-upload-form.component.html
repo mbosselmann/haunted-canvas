@@ -1,0 +1,12 @@
+<form class="form" (submit)="onSubmit($event)">
+  <input
+    id="file-input"
+    type="file"
+    class="file-input"
+    accept="image/*"
+    [formControl]="imageUploadControl"
+    hidden
+    (change)="onFileChange($event)"
+  />
+  <label class="file-input-label" for="file-input">Select Image</label>
+</form>

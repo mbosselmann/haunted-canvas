@@ -1,0 +1,15 @@
+.form {
+  height: 100%;
+  display: grid;
+  place-items: end center;
+  padding-bottom: 4rem;
+}
+
+.file-input-label {
+  background: #3a015c90;
+  padding: 2rem 3rem;
+  border: 2px solid #fef8f880;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 0 30px 10px #3a015c;
+}
