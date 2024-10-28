@@ -30,3 +30,7 @@
   display: grid;
   place-items: center;
 }
+
+.active {
+  background: #3a015c;
+}

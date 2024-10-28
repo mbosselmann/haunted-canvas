@@ -3,11 +3,12 @@ import { CategoryOptions } from '../model/categoryOption';
 import { categoryOptions } from '../data/categoryOptions';
 import { EditorComponent } from '../editor/editor.component';
 import { EditorSliderComponent } from '../editor-slider/editor-slider.component';
+import { ActiveDirective } from '../directives/active.directive';
 
 @Component({
   selector: 'app-editor-controls',
   standalone: true,
-  imports: [EditorComponent, EditorSliderComponent],
+  imports: [EditorComponent, EditorSliderComponent, ActiveDirective],
   templateUrl: './editor-controls.component.html',
   styleUrl: './editor-controls.component.css',
 })
