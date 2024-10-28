@@ -1,7 +1,7 @@
 <section class="editor-controls">
   <div class="editor-controls-section options-overview">
     @if (selectedOption) {
-      <app-editor-slider />
+      <app-editor-slider [selectedOption]="selectedOption" />
     }
     @if (selectedCategory && !selectedOption) {
       @for (option of categoryOptions[selectedCategory]; track option.id) {
@@ -17,14 +17,14 @@
   </div>
   <div class="editor-controls-section">
     @if (isImageChosen) {
-    @for (category of categories; track category) {
-      <button
-        type="button"
-        class="editor-controls-button"
-        (click)="onSelectCategory(category)"
-      >
-        {{ category }}
-      </button>
+      @for (category of categories; track category) {
+        <button
+          type="button"
+          class="editor-controls-button"
+          (click)="onSelectCategory(category)"
+        >
+          {{ category }}
+        </button>
       }
     }
   </div>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-editor-slider',
@@ -7,4 +7,7 @@ import { Component } from '@angular/core';
   templateUrl: './editor-slider.component.html',
   styleUrl: './editor-slider.component.css',
 })
-export class EditorSliderComponent {}
+export class EditorSliderComponent {
+  @Input()
+  selectedOption!: string;
+}
