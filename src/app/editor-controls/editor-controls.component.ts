@@ -1,18 +1,20 @@
 import { Component } from '@angular/core';
 import { CategoryOptions } from '../model/categoryOption';
 import { categoryOptions } from '../data/categoryOptions';
+import { EditorComponent } from '../editor/editor.component';
+import { EditorSliderComponent } from '../editor-slider/editor-slider.component';
 
 @Component({
-  selector: 'editor-controls',
+  selector: 'app-editor-controls',
   standalone: true,
-  imports: [],
+  imports: [EditorComponent, EditorSliderComponent],
   templateUrl: './editor-controls.component.html',
   styleUrl: './editor-controls.component.css',
 })
 export class EditorControlsComponent {
   categories: string[] = ['settings', 'filter', 'sticker', 'save'];
-  selectedCategory: string = '';
-  selectedOption: string = '';
+  selectedCategory = '';
+  selectedOption = '';
 
   categoryOptions: CategoryOptions = categoryOptions;
 

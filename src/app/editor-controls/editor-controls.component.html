@@ -1,24 +1,29 @@
 <section class="editor-controls">
   <div class="editor-controls-section slider">
-    @for (option of categoryOptions[selectedCategory]; track option.id){
-    <button
-      type="button"
-      class="editor-controls-button option-button"
-      (click)="onSelectOption(option.name)"
-    >
-      {{ option.name }}
-    </button>
+    @if (selectedOption) {
+      <app-editor-slider />
+    }
+    @if (selectedCategory && !selectedOption) {
+      @for (option of categoryOptions[selectedCategory]; track option.id) {
+        <button
+          type="button"
+          class="editor-controls-button option-button"
+          (click)="onSelectOption(option.name)"
+        >
+          {{ option.name }}
+        </button>
+      }
     }
   </div>
   <div class="editor-controls-section">
     @for (category of categories; track category) {
-    <button
-      type="button"
-      class="editor-controls-button"
-      (click)="onSelectCategory(category)"
-    >
-      {{ category }}
-    </button>
+      <button
+        type="button"
+        class="editor-controls-button"
+        (click)="onSelectCategory(category)"
+      >
+        {{ category }}
+      </button>
     }
   </div>
 </section>
