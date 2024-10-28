@@ -28,7 +28,7 @@ export class CanvasComponent implements AfterViewInit {
       image.onload = () => {
         const aspectRatio = image.naturalWidth / image.naturalHeight;
         const targetWidth = 375;
-        const targetHeight = 420;
+        const targetHeight = 350;
 
         if (image.naturalWidth > image.naturalHeight) {
           canvas.width = targetWidth;
