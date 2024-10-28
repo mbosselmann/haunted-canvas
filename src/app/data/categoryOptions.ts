@@ -1,6 +1,6 @@
 import { CategoryOption } from '../model/categoryOption';
 
-export const categoryOptions: { [key: string]: CategoryOption[] } = {
+export const categoryOptions: Record<string, CategoryOption[]> = {
   settings: [
     {
       id: 1,

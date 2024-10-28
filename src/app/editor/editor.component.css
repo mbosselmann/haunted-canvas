@@ -56,7 +56,7 @@
   border-width: 0;
 }
 
-editor-canvas {
+app-editor-canvas {
   background: #11001c;
   display: grid;
   place-items: center;

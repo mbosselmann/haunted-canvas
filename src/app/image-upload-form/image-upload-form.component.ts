@@ -2,7 +2,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'image-upload',
+  selector: 'app-image-upload',
   standalone: true,
   imports: [ReactiveFormsModule],
   templateUrl: './image-upload-form.component.html',
@@ -13,7 +13,7 @@ export class ImageUploadComponent {
   payLoad = '';
 
   @Output()
-  onImageIsChosen = new EventEmitter<boolean>();
+  isImageChosen = new EventEmitter<boolean>();
 
   @Output()
   setPreviewImage = new EventEmitter<string>();
@@ -29,7 +29,7 @@ export class ImageUploadComponent {
     if (!input.files?.[0]) return;
     const previewImageUrl = URL.createObjectURL(input.files?.[0]);
 
-    this.onImageIsChosen.emit(true);
+    this.isImageChosen.emit(true);
     this.setPreviewImage.emit(previewImageUrl);
   }
 }

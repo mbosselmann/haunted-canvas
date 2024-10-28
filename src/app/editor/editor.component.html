@@ -16,12 +16,12 @@
     </button>
   </header>
   @if (isImageChosen) {
-  <editor-canvas [previewImage]="previewImage" />
+    <app-editor-canvas [previewImage]="previewImage" />
   } @else {
-  <image-upload
-    (setPreviewImage)="setPreviewImage($event)"
-    (onImageIsChosen)="onImageChosen(true)"
-  />
+    <app-image-upload
+      (setPreviewImage)="setPreviewImage($event)"
+      (isImageChosen)="onImageChosen(true)"
+    />
   }
-  <editor-controls />
+  <app-editor-controls />
 </div>

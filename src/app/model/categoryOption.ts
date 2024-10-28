@@ -1,10 +1,8 @@
-export type CategoryOption = {
+export interface CategoryOption {
   id: number;
   name: string;
   icon?: string;
   action: () => void;
-};
+}
 
-export type CategoryOptions = {
-  [key: string]: CategoryOption[];
-};
+export type CategoryOptions = Record<string, CategoryOption[]>;

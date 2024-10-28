@@ -7,14 +7,14 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'editor-canvas',
+  selector: 'app-editor-canvas',
   standalone: true,
   imports: [],
   templateUrl: './canvas.component.html',
   styleUrl: './canvas.component.css',
 })
 export class CanvasComponent implements AfterViewInit {
-  @Input('previewImage')
+  @Input()
   previewImage!: string;
 
   @ViewChild('canvas', { read: ElementRef })

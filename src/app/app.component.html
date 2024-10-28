@@ -1,8 +1,8 @@
 <main class="main">
   @if (isEditorOpen) {
-  <editor (closeEditor)="toggleEditor($event)" />
+    <app-editor (closeEditor)="toggleEditor($event)" />
   } @else {
-  <hero (startEditor)="toggleEditor($event)" />
+    <app-hero (startEditor)="toggleEditor($event)" />
   }
 </main>
 

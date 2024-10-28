@@ -4,18 +4,18 @@ import { EditorControlsComponent } from '../editor-controls/editor-controls.comp
 import { ImageUploadComponent } from '../image-upload-form/image-upload-form.component';
 
 @Component({
-  selector: 'editor',
+  selector: 'app-editor',
   standalone: true,
   imports: [CanvasComponent, EditorControlsComponent, ImageUploadComponent],
   templateUrl: './editor.component.html',
   styleUrl: './editor.component.css',
 })
 export class EditorComponent {
-  title: string = 'Haunted Canvas';
-  closeIconUrl: string = 'assets/close-icon.svg';
-  greenEyeUrl: string = 'assets/green-eye.png';
-  isImageChosen: boolean = false;
-  previewImage: any = null;
+  title = 'Haunted Canvas';
+  closeIconUrl = 'assets/close-icon.svg';
+  greenEyeUrl = 'assets/green-eye.png';
+  isImageChosen = false;
+  previewImage = '';
 
   @Output()
   closeEditor = new EventEmitter<boolean>();
