@@ -20,7 +20,7 @@
   } @else {
     <app-image-upload
       (setPreviewImage)="setPreviewImage($event)"
-      (isImageChosen)="onImageChosen(true)"
+      (isImageChosen)="onImageChosen($event)"
     />
   }
   <app-editor-controls [isImageChosen]="isImageChosen" />

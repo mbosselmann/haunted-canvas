@@ -31,6 +31,5 @@ export class EditorComponent {
 
   setPreviewImage(previewImage: string) {
     this.previewImage = previewImage;
-    console.log(this.previewImage);
   }
 }

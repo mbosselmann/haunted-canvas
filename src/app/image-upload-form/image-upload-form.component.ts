@@ -11,6 +11,8 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 export class ImageUploadComponent {
   imageUploadControl = new FormControl();
   payLoad = '';
+  errorMessage = '';
+  errorActionMessage = '';
 
   @Output()
   isImageChosen = new EventEmitter<boolean>();
@@ -24,7 +26,18 @@ export class ImageUploadComponent {
 
   onFileChange(event: Event) {
     const input = event.target as HTMLInputElement;
+
     if (!input.files?.[0]) return;
+
+    const file = input.files[0];
+    const maxSizeInBytes = 5 * 1024 * 1024; // 5 MB
+
+    if (file.size > maxSizeInBytes) {
+      this.errorMessage = 'Your image file size exceeds 5MB.';
+      this.errorActionMessage = 'Please choose a smaller image file.';
+      this.isImageChosen.emit(false);
+      return;
+    }
 
     if (!input.files?.[0]) return;
     const previewImageUrl = URL.createObjectURL(input.files?.[0]);

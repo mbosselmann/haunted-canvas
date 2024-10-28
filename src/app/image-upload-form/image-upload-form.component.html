@@ -9,4 +9,12 @@
     (change)="onFileChange($event)"
   />
   <label class="file-input-label" for="file-input">Select Image</label>
+  @if (errorMessage && errorActionMessage) {
+    <div>
+      <p class="error-message">{{ errorMessage }}</p>
+      <p class="error-message">
+        {{ errorActionMessage }}
+      </p>
+    </div>
+  }
 </form>

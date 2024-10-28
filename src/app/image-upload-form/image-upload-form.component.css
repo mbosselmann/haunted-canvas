@@ -3,13 +3,20 @@
   display: grid;
   place-items: end center;
   padding-bottom: 4rem;
+  grid-template-rows: 75% auto;
 }
-
 .file-input-label {
+  display: block;
   background: #3a015c90;
   padding: 2rem 3rem;
   border: 2px solid #fef8f880;
   border-radius: 10px;
   cursor: pointer;
   box-shadow: 0 0 30px 10px #3a015c;
+}
+
+.error-message {
+  text-align: center;
+  font-size: 0.9rem;
+  padding: 0 1rem;
 }
