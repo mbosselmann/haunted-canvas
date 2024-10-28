@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CategoryOptions } from '../model/categoryOption';
 import { categoryOptions } from '../data/categoryOptions';
 import { EditorComponent } from '../editor/editor.component';
@@ -18,8 +18,12 @@ export class EditorControlsComponent {
 
   categoryOptions: CategoryOptions = categoryOptions;
 
+  @Input()
+  isImageChosen = false;
+
   onSelectCategory(category: string) {
     this.selectedCategory = this.selectedCategory === category ? '' : category;
+    this.selectedOption = '';
   }
   onSelectOption(option: string) {
     this.selectedOption = this.selectedOption === option ? '' : option;
