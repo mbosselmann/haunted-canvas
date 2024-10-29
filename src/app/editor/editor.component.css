@@ -55,9 +55,3 @@
   white-space: nowrap;
   border-width: 0;
 }
-
-app-editor-canvas {
-  background: #11001c;
-  display: grid;
-  place-items: center;
-}

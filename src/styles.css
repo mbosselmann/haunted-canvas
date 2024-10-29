@@ -15,14 +15,6 @@ body {
   height: 100svh;
 }
 
-app-root {
-  width: 100%;
-}
-
-hero {
-  width: 100%;
-}
-
 h1 {
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
