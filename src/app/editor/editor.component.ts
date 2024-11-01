@@ -50,6 +50,8 @@ export class EditorComponent implements AfterViewChecked {
   onCloseEditor() {
     this.closeEditor.emit(false);
     this.isImageChosen = false;
+    this.canvasSettings = [];
+    this.previewImage = '';
   }
 
   onImageChosen(isImageChosen: boolean) {
