@@ -76,7 +76,13 @@ export class EditorControlsComponent {
       const dataUrl = this.canvasElement.toDataURL('image/png');
       const link = document.createElement('a');
       link.href = dataUrl;
-      link.download = 'canvas-image.png';
+      const date = new Date();
+      const formattedDate = date.toLocaleDateString().replace(/\//g, '-');
+      const formattedTime = date
+        .toTimeString()
+        .split(' ')[0]
+        .replace(/:/g, '-');
+      link.download = `haunted-canvas_${formattedDate}_${formattedTime}.png`;
       link.click();
     }
   }
