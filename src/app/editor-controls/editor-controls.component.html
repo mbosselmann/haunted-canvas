@@ -1,9 +1,14 @@
 <section class="editor-controls">
   <div class="editor-controls-section options-overview">
-    @if (selectedOption) {
-      <app-editor-slider [selectedOption]="selectedOption" />
+    @if (selectedOption?.type === "settings") {
+      <app-editor-slider
+        (valueChange)="onSliderValueChange($event)"
+        [selectedOption]="selectedOption!"
+      />
     }
-    @if (selectedCategory && !selectedOption) {
+    @if (
+      (selectedCategory && !selectedOption) || selectedOption?.type === "save"
+    ) {
       @for (option of categoryOptions[selectedCategory]; track option.id) {
         <button
           type="button"

@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { CanvasSetting } from '../canvas/canvasSettings.directive';
 
 @Component({
   selector: 'app-editor-slider',
@@ -8,6 +9,15 @@ import { Component, Input } from '@angular/core';
   styleUrl: './editor-slider.component.css',
 })
 export class EditorSliderComponent {
+  @Output()
+  valueChange = new EventEmitter<number>();
+
   @Input()
-  selectedOption!: string;
+  selectedOption!: CanvasSetting;
+
+  onValueChange(event: Event) {
+    if (event.target) {
+      this.valueChange.emit(Number((event.target as HTMLInputElement).value));
+    }
+  }
 }
