@@ -1,1 +1,11 @@
-<p>{{ selectedOption }}</p>
+<div>
+  <label for="slider">{{ selectedOption.name }}</label>
+  <input
+    type="range"
+    id="slider"
+    min="{{ selectedOption.minValue }}"
+    max="{{ selectedOption.maxValue }}"
+    value="{{ selectedOption.value }}"
+    (change)="onValueChange($event)"
+  />
+</div>
