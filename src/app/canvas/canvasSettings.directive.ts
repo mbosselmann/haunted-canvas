@@ -27,18 +27,6 @@ export class CanvasSettingDirective implements AfterViewInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['appCanvasSettings'] && this.appCanvasSettings.length) {
-      if (
-        this.appCanvasSettings.find(
-          (setting) => setting.name.toLowerCase() === 'save',
-        )
-      ) {
-        this.saveCanvas();
-        this.appCanvasSettings = this.appCanvasSettings.filter(
-          (setting) => setting.name.toLowerCase() !== 'save',
-        );
-        return;
-      }
-
       this.redrawContent();
     }
   }
@@ -75,6 +63,7 @@ export class CanvasSettingDirective implements AfterViewInit, OnChanges {
     image.src = this.previewImage;
     image.onload = () => {
       this.applySettings(ctx);
+      ctx.imageSmoothingEnabled = false;
       ctx.drawImage(image, 0, 0, ctx.canvas.width, ctx.canvas.height);
     };
   }
@@ -87,20 +76,25 @@ export class CanvasSettingDirective implements AfterViewInit, OnChanges {
       image.onload = () => {
         const aspectRatio = image.naturalWidth / image.naturalHeight;
         const targetWidth = 375;
-        const targetHeight = 350;
+        const targetHeight = 420;
+        const scale = 3;
 
         if (image.naturalWidth > image.naturalHeight) {
-          canvas.width = targetWidth;
-          canvas.height = targetWidth / aspectRatio;
+          canvas.width = targetWidth * scale;
+          canvas.style.width = `${targetWidth}px`;
+          canvas.height = (targetWidth / aspectRatio) * scale;
         } else {
-          canvas.height = targetHeight;
-          canvas.width = targetHeight * aspectRatio;
+          canvas.height = targetHeight * scale;
+          canvas.style.height = `${targetHeight}px`;
+          canvas.width = targetHeight * aspectRatio * scale;
         }
 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         if (this.appCanvasSettings.length) {
           this.applySettings(ctx);
         }
+
+        ctx.imageSmoothingEnabled = false;
         ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
       };
       image.src = imageUrl;
@@ -109,15 +103,5 @@ export class CanvasSettingDirective implements AfterViewInit, OnChanges {
 
   ngAfterViewInit(): void {
     this.loadImageToCanvas(this.previewImage);
-  }
-
-  saveCanvas() {
-    console.log('saveCanvas');
-    const canvas = this.canvasElement.nativeElement;
-    const dataUrl = canvas.toDataURL('image/png');
-    const link = document.createElement('a');
-    link.href = dataUrl;
-    link.download = 'canvas-image.png';
-    link.click();
   }
 }

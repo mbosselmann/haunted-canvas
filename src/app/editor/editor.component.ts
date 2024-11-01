@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Output,
+  ViewChild,
+  AfterViewChecked,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { CanvasComponent } from '../canvas/canvas.component';
 import { EditorControlsComponent } from '../editor-controls/editor-controls.component';
 import { ImageUploadComponent } from '../image-upload-form/image-upload-form.component';
@@ -11,7 +18,7 @@ import { CanvasSetting } from '../canvas/canvasSettings.directive';
   templateUrl: './editor.component.html',
   styleUrl: './editor.component.css',
 })
-export class EditorComponent {
+export class EditorComponent implements AfterViewChecked {
   title = 'Haunted Canvas';
   closeIconUrl = 'assets/close-icon.svg';
   greenEyeUrl = 'assets/green-eye.png';
@@ -21,6 +28,24 @@ export class EditorComponent {
 
   @Output()
   closeEditor = new EventEmitter<boolean>();
+
+  @ViewChild(CanvasComponent)
+  canvasComponent!: CanvasComponent;
+
+  canvasElement!: HTMLCanvasElement;
+
+  constructor(private changeDetectorRef: ChangeDetectorRef) {}
+
+  ngAfterViewChecked() {
+    this.setCanvasElement();
+    this.changeDetectorRef.detectChanges();
+  }
+
+  setCanvasElement() {
+    if (this.canvasComponent && this.canvasComponent.canvas) {
+      this.canvasElement = this.canvasComponent.canvas.nativeElement;
+    }
+  }
 
   onCloseEditor() {
     this.closeEditor.emit(false);

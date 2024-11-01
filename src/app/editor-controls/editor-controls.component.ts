@@ -23,6 +23,9 @@ export class EditorControlsComponent {
   @Input()
   isImageChosen = false;
 
+  @Input()
+  canvasElement!: HTMLCanvasElement;
+
   @Output()
   sliderValueChange = new EventEmitter<CanvasSetting>();
 
@@ -63,6 +66,18 @@ export class EditorControlsComponent {
         }
       : null;
 
-    console.log('selectedOption:', this.selectedOption);
+    if (this.selectedOption && this.selectedOption.name === 'Save') {
+      this.saveCanvas();
+    }
+  }
+
+  saveCanvas() {
+    if (this.canvasElement) {
+      const dataUrl = this.canvasElement.toDataURL('image/png');
+      const link = document.createElement('a');
+      link.href = dataUrl;
+      link.download = 'canvas-image.png';
+      link.click();
+    }
   }
 }

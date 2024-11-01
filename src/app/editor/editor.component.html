@@ -27,6 +27,7 @@
     />
   }
   <app-editor-controls
+    [canvasElement]="canvasElement"
     (sliderValueChange)="onSliderValueChange($event)"
     [isImageChosen]="isImageChosen"
   />
