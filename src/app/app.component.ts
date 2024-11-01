@@ -12,7 +12,7 @@ import { HeroComponent } from './hero/hero.component';
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  isEditorOpen = true;
+  isEditorOpen = false;
 
   toggleEditor(isEditorOpen: boolean): void {
     this.isEditorOpen = isEditorOpen;
