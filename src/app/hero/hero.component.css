@@ -16,11 +16,20 @@
   gap: 0.5rem;
 }
 
+.hero-header-image {
+  width: 30px;
+  height: 30px;
+}
+
+.hero-header-headline {
+  font-size: 1.2rem;
+}
+
 .hero-image {
   display: block;
   width: 100%;
   max-width: 700px;
-  height: 15rem;
+  height: 10rem;
   object-fit: cover;
 }
 
