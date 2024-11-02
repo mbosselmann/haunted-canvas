@@ -20,6 +20,10 @@
   min-width: 7rem;
 }
 
+.option-image {
+  height: 40px;
+}
+
 .editor-controls-button {
   background: #3a015c90;
   color: #fef8f8;

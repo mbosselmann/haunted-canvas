@@ -41,7 +41,7 @@ export const categoryOptions: Record<string, CategoryOption[]> = {
     {
       id: 5,
       name: 'Blur',
-      icon: 'rotate-icon',
+      icon: 'blur-icon',
       type: 'settings',
       defaultValue: 0,
       minValue: 0,
@@ -50,7 +50,7 @@ export const categoryOptions: Record<string, CategoryOption[]> = {
     {
       id: 6,
       name: 'Sepia',
-      icon: 'rotate-icon',
+      icon: 'sepia-icon',
       type: 'settings',
       defaultValue: 0,
       minValue: 0,
@@ -87,7 +87,7 @@ export const categoryOptions: Record<string, CategoryOption[]> = {
     {
       id: 1,
       name: 'Save',
-      icon: 'save-icon',
+      icon: 'download-icon',
       type: 'save',
     },
     {
