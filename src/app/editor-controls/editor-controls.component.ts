@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CategoryOptions } from '../model/categoryOption';
 import { categoryOptions } from '../data/categoryOptions';
-import { EditorComponent } from '../editor/editor.component';
 import { EditorSliderComponent } from '../editor-slider/editor-slider.component';
 import { ActiveDirective } from '../directives/active.directive';
 import { CanvasSetting } from '../canvas/canvasSettings.directive';
@@ -9,7 +8,7 @@ import { CanvasSetting } from '../canvas/canvasSettings.directive';
 @Component({
   selector: 'app-editor-controls',
   standalone: true,
-  imports: [EditorComponent, EditorSliderComponent, ActiveDirective],
+  imports: [EditorSliderComponent, ActiveDirective],
   templateUrl: './editor-controls.component.html',
   styleUrl: './editor-controls.component.css',
 })
@@ -85,5 +84,9 @@ export class EditorControlsComponent {
       link.download = `haunted-canvas_${formattedDate}_${formattedTime}.png`;
       link.click();
     }
+  }
+
+  onCloseSlider() {
+    this.selectedOption = null;
   }
 }

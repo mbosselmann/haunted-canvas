@@ -4,16 +4,11 @@
       <img width="30" height="30" [src]="greenEyeUrl" alt="" />
       <h1 class="editor-headline">{{ title }}</h1>
     </div>
-    <button type="button" class="header-button" (click)="onCloseEditor()">
-      <img
-        class="button-icon"
-        width="40"
-        height="40"
-        [src]="closeIconUrl"
-        alt=""
-      />
-      <span class="sr-only">Close Editor</span>
-    </button>
+    <app-button
+      (close)="onCloseEditor()"
+      [imageSrc]="closeIconUrl"
+      name="Close editor"
+    ></app-button>
   </header>
   @if (isImageChosen) {
     <app-editor-canvas

@@ -10,11 +10,17 @@ import { CanvasComponent } from '../canvas/canvas.component';
 import { EditorControlsComponent } from '../editor-controls/editor-controls.component';
 import { ImageUploadComponent } from '../image-upload-form/image-upload-form.component';
 import { CanvasSetting } from '../canvas/canvasSettings.directive';
+import { ButtonComponent } from '../button/button.component';
 
 @Component({
   selector: 'app-editor',
   standalone: true,
-  imports: [CanvasComponent, EditorControlsComponent, ImageUploadComponent],
+  imports: [
+    CanvasComponent,
+    EditorControlsComponent,
+    ImageUploadComponent,
+    ButtonComponent,
+  ],
   templateUrl: './editor.component.html',
   styleUrl: './editor.component.css',
 })

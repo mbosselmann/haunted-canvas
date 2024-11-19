@@ -1,16 +1,23 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CanvasSetting } from '../canvas/canvasSettings.directive';
+import { ButtonComponent } from '../button/button.component';
 
 @Component({
   selector: 'app-editor-slider',
   standalone: true,
-  imports: [],
+  imports: [ButtonComponent],
   templateUrl: './editor-slider.component.html',
   styleUrl: './editor-slider.component.css',
 })
 export class EditorSliderComponent {
+  closeIconUrl = 'assets/close-icon.svg';
+  saveIconUrl = 'assets/save-icon.svg';
+
   @Output()
   valueChange = new EventEmitter<number>();
+
+  @Output()
+  closeSlider = new EventEmitter();
 
   @Input()
   selectedOption!: CanvasSetting;
@@ -18,6 +25,17 @@ export class EditorSliderComponent {
   onValueChange(event: Event) {
     if (event.target) {
       this.valueChange.emit(Number((event.target as HTMLInputElement).value));
+    }
+  }
+
+  onCloseSlider(type: string) {
+    if (type === 'close') {
+      this.valueChange.emit(this.selectedOption.defaultValue);
+      this.closeSlider.emit();
+    }
+
+    if (type === 'save') {
+      this.closeSlider.emit();
     }
   }
 }

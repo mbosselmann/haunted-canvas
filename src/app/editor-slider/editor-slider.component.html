@@ -1,8 +1,9 @@
 <div>
-  <label for="slider">
+  <label class="label" for="slider">
     {{ selectedOption.name }}
   </label>
   <input
+    class="input"
     type="range"
     id="slider"
     min="{{ selectedOption.minValue }}"
@@ -10,4 +11,17 @@
     value="{{ selectedOption.value }}"
     (change)="onValueChange($event)"
   />
+</div>
+<div class="button-group">
+  <app-button
+    (close)="onCloseSlider('close')"
+    [imageSrc]="closeIconUrl"
+    name="close without saving"
+  ></app-button>
+  <app-button
+    (close)="onCloseSlider('save')"
+    [imageSrc]="saveIconUrl"
+    name="close with saving"
+    [sizeDown]="true"
+  ></app-button>
 </div>
