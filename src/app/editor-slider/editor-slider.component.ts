@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { CanvasSetting } from '../canvas/canvasSettings.directive';
+import { PreviewImageSetting } from '../directives/previewImage.directive';
 import { ButtonComponent } from '../button/button.component';
 
 @Component({
@@ -20,7 +20,7 @@ export class EditorSliderComponent {
   closeSlider = new EventEmitter();
 
   @Input()
-  selectedOption!: CanvasSetting;
+  selectedOption!: PreviewImageSetting;
 
   onValueChange(event: Event) {
     if (event.target) {

@@ -9,7 +9,7 @@ import {
 import { CanvasComponent } from '../canvas/canvas.component';
 import { EditorControlsComponent } from '../editor-controls/editor-controls.component';
 import { ImageUploadComponent } from '../image-upload-form/image-upload-form.component';
-import { CanvasSetting } from '../canvas/canvasSettings.directive';
+import { PreviewImageSetting } from '../directives/previewImage.directive';
 import { ButtonComponent } from '../button/button.component';
 
 @Component({
@@ -30,7 +30,7 @@ export class EditorComponent implements AfterViewChecked {
   greenEyeUrl = 'assets/green-eye.png';
   isImageChosen = false;
   previewImage = '';
-  canvasSettings: CanvasSetting[] = [];
+  appPreviewImageSettings: PreviewImageSetting[] = [];
 
   @Output()
   closeEditor = new EventEmitter<boolean>();
@@ -56,7 +56,7 @@ export class EditorComponent implements AfterViewChecked {
   onCloseEditor() {
     this.closeEditor.emit(false);
     this.isImageChosen = false;
-    this.canvasSettings = [];
+    this.appPreviewImageSettings = [];
     this.previewImage = '';
   }
 
@@ -68,17 +68,18 @@ export class EditorComponent implements AfterViewChecked {
     this.previewImage = previewImage;
   }
 
-  onSliderValueChange(setting: CanvasSetting) {
+  onSliderValueChange(setting: PreviewImageSetting) {
     if (
-      this.canvasSettings.find(
-        (canvasSetting) => canvasSetting.id === setting.id,
+      this.appPreviewImageSettings.find(
+        (appPreviewImageSetting) => appPreviewImageSetting.id === setting.id,
       )
     ) {
-      this.canvasSettings = this.canvasSettings.map((canvasSetting) =>
-        canvasSetting.id === setting.id ? setting : canvasSetting,
+      this.appPreviewImageSettings = this.appPreviewImageSettings.map(
+        (imageSetting) =>
+          imageSetting.id === setting.id ? setting : imageSetting,
       );
     } else {
-      this.canvasSettings = [...this.canvasSettings, setting];
+      this.appPreviewImageSettings = [...this.appPreviewImageSettings, setting];
     }
   }
 }

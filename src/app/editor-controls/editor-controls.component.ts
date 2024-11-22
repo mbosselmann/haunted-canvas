@@ -3,7 +3,7 @@ import { CategoryOptions } from '../model/categoryOption';
 import { categoryOptions } from '../data/categoryOptions';
 import { EditorSliderComponent } from '../editor-slider/editor-slider.component';
 import { ActiveDirective } from '../directives/active.directive';
-import { CanvasSetting } from '../canvas/canvasSettings.directive';
+import { PreviewImageSetting } from '../directives/previewImage.directive';
 
 @Component({
   selector: 'app-editor-controls',
@@ -15,7 +15,7 @@ import { CanvasSetting } from '../canvas/canvasSettings.directive';
 export class EditorControlsComponent {
   categories: string[] = ['settings', 'sticker', 'save'];
   selectedCategory = '';
-  selectedOption: CanvasSetting | null = null;
+  selectedOption: PreviewImageSetting | null = null;
 
   categoryOptions: CategoryOptions = categoryOptions;
 
@@ -26,7 +26,7 @@ export class EditorControlsComponent {
   canvasElement!: HTMLCanvasElement;
 
   @Output()
-  sliderValueChange = new EventEmitter<CanvasSetting>();
+  sliderValueChange = new EventEmitter<PreviewImageSetting>();
 
   onSliderValueChange(value: number) {
     if (this.selectedOption && this.selectedOption.id !== undefined) {

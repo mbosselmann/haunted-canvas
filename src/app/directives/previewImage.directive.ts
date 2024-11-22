@@ -8,17 +8,17 @@ import {
 } from '@angular/core';
 import { CategoryOption } from '../model/categoryOption';
 
-export interface CanvasSetting extends CategoryOption {
+export interface PreviewImageSetting extends CategoryOption {
   value: number;
 }
 
 @Directive({
-  selector: '[appCanvasSettings]',
+  selector: '[appPreviewImageSettings]',
   standalone: true,
 })
-export class CanvasSettingDirective implements AfterViewInit, OnChanges {
+export class PreviewImageSettingsDirective implements AfterViewInit, OnChanges {
   @Input()
-  appCanvasSettings!: CanvasSetting[];
+  appPreviewImageSettings!: PreviewImageSetting[];
 
   @Input()
   previewImage!: string;
@@ -26,14 +26,20 @@ export class CanvasSettingDirective implements AfterViewInit, OnChanges {
   constructor(private canvasElement: ElementRef<HTMLCanvasElement>) {}
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['appCanvasSettings'] && this.appCanvasSettings.length) {
+    if (
+      changes['appPreviewImageSettings'] &&
+      this.appPreviewImageSettings.length
+    ) {
       this.redrawContent();
     }
   }
 
   private applySettings(ctx: CanvasRenderingContext2D) {
-    if (this.appCanvasSettings && this.appCanvasSettings.length > 0) {
-      const filters = this.appCanvasSettings
+    if (
+      this.appPreviewImageSettings &&
+      this.appPreviewImageSettings.length > 0
+    ) {
+      const filters = this.appPreviewImageSettings
         .map((setting) => {
           if (setting.name.toLowerCase() === 'inversion') {
             return `invert(${setting.value}%)`;
@@ -90,7 +96,7 @@ export class CanvasSettingDirective implements AfterViewInit, OnChanges {
         }
 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        if (this.appCanvasSettings.length) {
+        if (this.appPreviewImageSettings.length) {
           this.applySettings(ctx);
         }
 

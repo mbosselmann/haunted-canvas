@@ -1,19 +1,19 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import {
-  CanvasSetting,
-  CanvasSettingDirective,
-} from './canvasSettings.directive';
+  PreviewImageSetting,
+  PreviewImageSettingsDirective,
+} from '../directives/previewImage.directive';
 
 @Component({
   selector: 'app-editor-canvas',
   standalone: true,
-  imports: [CanvasSettingDirective],
+  imports: [PreviewImageSettingsDirective],
   templateUrl: './canvas.component.html',
   styleUrl: './canvas.component.css',
 })
 export class CanvasComponent {
   @Input()
-  canvasSettings!: CanvasSetting[];
+  appPreviewImageSettings!: PreviewImageSetting[];
 
   @Input()
   previewImage!: string;
