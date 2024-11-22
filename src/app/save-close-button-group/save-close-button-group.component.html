@@ -1,0 +1,11 @@
+<app-button
+  (close)="onClose('close')"
+  [imageSrc]="closeIconUrl"
+  name="close without saving"
+/>
+<app-button
+  (close)="onClose('save')"
+  [imageSrc]="saveIconUrl"
+  name="close with saving"
+  [sizeDown]="true"
+/>

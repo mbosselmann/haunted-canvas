@@ -1,11 +1,12 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { PreviewImageSetting } from '../directives/previewImage.directive';
 import { ButtonComponent } from '../button/button.component';
+import { SaveCloseButtonGroupComponent } from '../save-close-button-group/save-close-button-group.component';
 
 @Component({
   selector: 'app-editor-slider',
   standalone: true,
-  imports: [ButtonComponent],
+  imports: [ButtonComponent, SaveCloseButtonGroupComponent],
   templateUrl: './editor-slider.component.html',
   styleUrl: './editor-slider.component.css',
 })

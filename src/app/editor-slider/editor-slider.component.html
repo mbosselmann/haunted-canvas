@@ -12,16 +12,4 @@
     (change)="onValueChange($event)"
   />
 </div>
-<div class="button-group">
-  <app-button
-    (close)="onCloseSlider('close')"
-    [imageSrc]="closeIconUrl"
-    name="close without saving"
-  />
-  <app-button
-    (close)="onCloseSlider('save')"
-    [imageSrc]="saveIconUrl"
-    name="close with saving"
-    [sizeDown]="true"
-  />
-</div>
+<app-save-close-button-group (close)="onCloseSlider($event)" />
