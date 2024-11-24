@@ -7,13 +7,16 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { CategoryOption } from '../model/categoryOption';
+import { SelectedSticker } from '../editor-controls/editor-controls.component';
+import { applyImageSettings } from './helper/applyImageSettings';
+import { loadImageToCanvas } from './helper/loadImage';
 
 export interface PreviewImageSetting extends CategoryOption {
   value: number;
 }
 
 @Directive({
-  selector: '[appPreviewImageSettings]',
+  selector: '[appPreviewImage]',
   standalone: true,
 })
 export class PreviewImageSettingsDirective implements AfterViewInit, OnChanges {
@@ -22,6 +25,9 @@ export class PreviewImageSettingsDirective implements AfterViewInit, OnChanges {
 
   @Input()
   previewImage!: string;
+
+  @Input()
+  sticker!: SelectedSticker;
 
   constructor(private canvasElement: ElementRef<HTMLCanvasElement>) {}
 
@@ -32,30 +38,9 @@ export class PreviewImageSettingsDirective implements AfterViewInit, OnChanges {
     ) {
       this.redrawContent();
     }
-  }
 
-  private applySettings(ctx: CanvasRenderingContext2D) {
-    if (
-      this.appPreviewImageSettings &&
-      this.appPreviewImageSettings.length > 0
-    ) {
-      const filters = this.appPreviewImageSettings
-        .map((setting) => {
-          if (setting.name.toLowerCase() === 'inversion') {
-            return `invert(${setting.value}%)`;
-          } else if (setting.name.toLowerCase() === 'saturation') {
-            return `saturate(${setting.value}%)`;
-          } else if (setting.name.toLowerCase() === 'sepia') {
-            return `sepia(${setting.value}%)`;
-          } else if (setting.name.toLowerCase() === 'blur') {
-            return `blur(${setting.value}px)`;
-          } else {
-            return `${setting.name.toLowerCase()}(${setting.value}%)`;
-          }
-        })
-        .join(' ');
-
-      ctx.filter = filters;
+    if (changes['sticker'] && changes['sticker'].currentValue.id) {
+      this.redrawContent();
     }
   }
 
@@ -68,46 +53,22 @@ export class PreviewImageSettingsDirective implements AfterViewInit, OnChanges {
     const image = new Image();
     image.src = this.previewImage;
     image.onload = () => {
-      this.applySettings(ctx);
+      if (
+        this.appPreviewImageSettings &&
+        this.appPreviewImageSettings.length > 0
+      ) {
+        applyImageSettings(ctx, this.appPreviewImageSettings);
+      }
       ctx.imageSmoothingEnabled = false;
       ctx.drawImage(image, 0, 0, ctx.canvas.width, ctx.canvas.height);
     };
   }
 
-  loadImageToCanvas(imageUrl: string) {
-    const canvas = this.canvasElement.nativeElement;
-    const ctx = canvas.getContext('2d');
-    if (ctx) {
-      const image = new Image();
-      image.onload = () => {
-        const aspectRatio = image.naturalWidth / image.naturalHeight;
-        const targetWidth = 375;
-        const targetHeight = 420;
-        const scale = 3;
-
-        if (image.naturalWidth > image.naturalHeight) {
-          canvas.width = targetWidth * scale;
-          canvas.style.width = `${targetWidth}px`;
-          canvas.height = (targetWidth / aspectRatio) * scale;
-        } else {
-          canvas.height = targetHeight * scale;
-          canvas.style.height = `${targetHeight}px`;
-          canvas.width = targetHeight * aspectRatio * scale;
-        }
-
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        if (this.appPreviewImageSettings.length) {
-          this.applySettings(ctx);
-        }
-
-        ctx.imageSmoothingEnabled = false;
-        ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
-      };
-      image.src = imageUrl;
-    }
-  }
-
   ngAfterViewInit(): void {
-    this.loadImageToCanvas(this.previewImage);
+    loadImageToCanvas(
+      this.previewImage,
+      this.canvasElement,
+      this.appPreviewImageSettings,
+    );
   }
 }
