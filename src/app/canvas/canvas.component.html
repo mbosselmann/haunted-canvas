@@ -1,8 +1,22 @@
-<canvas
-  #canvas
-  class="canvas"
-  [appPreviewImageSettings]="appPreviewImageSettings"
-  [previewImage]="previewImage"
-  width="800"
-  height="600"
-></canvas>
+@if (selectedCategory === "settings") {
+  <canvas
+    #styleCanvas
+    class="canvas"
+    appPreviewImage
+    [previewImage]="previewImage"
+    [appPreviewImageSettings]="appPreviewImageSettings"
+    width="800"
+    height="600"
+  ></canvas>
+} @else {
+  <canvas
+    #finalCanvas
+    class="canvas"
+    appSticker
+    [sticker]="sticker"
+    appFinalImage
+    [finalImage]="finalImage"
+    width="800"
+    height="600"
+  ></canvas>
+}

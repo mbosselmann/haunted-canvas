@@ -7,11 +7,17 @@ import {
   ChangeDetectorRef,
 } from '@angular/core';
 import { CanvasComponent } from '../canvas/canvas.component';
-import { EditorControlsComponent } from '../editor-controls/editor-controls.component';
+import {
+  EditorControlsComponent,
+  SelectedSticker,
+} from '../editor-controls/editor-controls.component';
 import { ImageUploadComponent } from '../image-upload-form/image-upload-form.component';
 import { PreviewImageSetting } from '../directives/previewImage.directive';
 import { ButtonComponent } from '../button/button.component';
 
+export type Categories = ['settings', 'sticker', 'save'];
+
+export type SelectedCategory = 'settings' | 'sticker' | 'save' | '';
 @Component({
   selector: 'app-editor',
   standalone: true,
@@ -30,7 +36,11 @@ export class EditorComponent implements AfterViewChecked {
   greenEyeUrl = 'assets/green-eye.png';
   isImageChosen = false;
   previewImage = '';
+  finalImage = '';
+  categories: Categories = ['settings', 'sticker', 'save'];
+  selectedCategory: SelectedCategory = 'settings';
   appPreviewImageSettings: PreviewImageSetting[] = [];
+  sticker: SelectedSticker = { id: '', src: '' };
 
   @Output()
   closeEditor = new EventEmitter<boolean>();
@@ -58,6 +68,7 @@ export class EditorComponent implements AfterViewChecked {
     this.isImageChosen = false;
     this.appPreviewImageSettings = [];
     this.previewImage = '';
+    this.sticker = { id: '', src: '' };
   }
 
   onImageChosen(isImageChosen: boolean) {
@@ -81,5 +92,13 @@ export class EditorComponent implements AfterViewChecked {
     } else {
       this.appPreviewImageSettings = [...this.appPreviewImageSettings, setting];
     }
+  }
+
+  onSelectedStickerChange(sticker: SelectedSticker) {
+    this.sticker = sticker;
+  }
+
+  onSelectedCategoryChange(category: SelectedCategory) {
+    this.selectedCategory = this.selectedCategory === category ? '' : category;
   }
 }

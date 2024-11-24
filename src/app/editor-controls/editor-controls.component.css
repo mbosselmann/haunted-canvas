@@ -1,4 +1,4 @@
-.editor-controls {
+:host {
   display: grid;
   height: 100%;
   grid-template-rows: 21fr 1fr;

@@ -1,11 +1,11 @@
-.grid {
+:host {
   display: grid;
   height: 100svh;
   grid-template-rows: 4rem auto 10rem;
 }
 
 @media (min-width: 500px) {
-  .grid {
+  :host {
     height: 80svh;
   }
 }

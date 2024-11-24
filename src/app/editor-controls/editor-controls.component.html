@@ -1,42 +1,41 @@
-<section class="editor-controls">
-  <div class="editor-controls-section options-overview">
-    @if (selectedOption?.type === "settings") {
-      <app-editor-slider
-        (closeSlider)="onCloseSlider()"
-        (valueChange)="onSliderValueChange($event)"
-        [selectedOption]="selectedOption!"
-      />
+<div class="editor-controls-section options-overview">
+  @if (selectedPreviewImageOptions?.type === "settings") {
+    <app-editor-slider
+      (closeSlider)="onCloseSlider()"
+      (valueChange)="onSliderValueChange($event)"
+      [selectedPreviewImageOptions]="selectedPreviewImageOptions!"
+    />
+  }
+  @if (
+    (isImageChosen && selectedCategory && !selectedPreviewImageOptions) ||
+    selectedPreviewImageOptions?.type === "save"
+  ) {
+    @for (option of categoryOptions[selectedCategory]; track option.id) {
+      <button
+        type="button"
+        class="editor-controls-button option-button"
+        (click)="onSelectOption(option.name)"
+      >
+        <img
+          class="option-image"
+          [src]="'/assets/' + option.icon + '.svg'"
+          [alt]="option.name"
+        />
+      </button>
     }
-    @if (
-      (selectedCategory && !selectedOption) || selectedOption?.type === "save"
-    ) {
-      @for (option of categoryOptions[selectedCategory]; track option.id) {
-        <button
-          type="button"
-          class="editor-controls-button option-button"
-          (click)="onSelectOption(option.name)"
-        >
-          <img
-            class="option-image"
-            [src]="'/assets/' + option.icon + '.svg'"
-            [alt]="option.name"
-          />
-        </button>
-      }
+  }
+</div>
+<div class="editor-controls-section">
+  @if (isImageChosen && !selectedPreviewImageOptions) {
+    @for (category of categories; track category) {
+      <button
+        type="button"
+        class="editor-controls-button"
+        (click)="onSelectCategory(category)"
+        [appActive]="selectedCategory === category"
+      >
+        {{ category }}
+      </button>
     }
-  </div>
-  <div class="editor-controls-section">
-    @if (isImageChosen && !selectedOption) {
-      @for (category of categories; track category) {
-        <button
-          type="button"
-          class="editor-controls-button"
-          (click)="onSelectCategory(category)"
-          [appActive]="selectedCategory === category"
-        >
-          {{ category }}
-        </button>
-      }
-    }
-  </div>
-</section>
+  }
+</div>

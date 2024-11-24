@@ -1,14 +1,14 @@
 <div class="input-group">
   <label class="label" for="slider">
-    {{ selectedOption.name }}
+    {{ selectedPreviewImageOptions.name }}
   </label>
   <input
     class="input"
     type="range"
     id="slider"
-    min="{{ selectedOption.minValue }}"
-    max="{{ selectedOption.maxValue }}"
-    value="{{ selectedOption.value }}"
+    min="{{ selectedPreviewImageOptions.minValue }}"
+    max="{{ selectedPreviewImageOptions.maxValue }}"
+    value="{{ selectedPreviewImageOptions.value }}"
     (change)="onValueChange($event)"
   />
 </div>

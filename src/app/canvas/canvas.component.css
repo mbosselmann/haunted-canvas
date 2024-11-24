@@ -2,9 +2,11 @@
   background: #11001c;
   display: grid;
   place-items: center;
+  position: relative;
 }
 
 .canvas {
+  position: absolute;
   margin: 0 auto;
   display: block;
   max-width: 375px;

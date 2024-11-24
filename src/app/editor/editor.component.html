@@ -1,29 +1,29 @@
-<div class="grid">
-  <header class="editor-header">
-    <div class="editor-header-left">
-      <img width="30" height="30" [src]="greenEyeUrl" alt="" />
-      <h1 class="editor-headline">{{ title }}</h1>
-    </div>
-    <app-button
-      (close)="onCloseEditor()"
-      [imageSrc]="closeIconUrl"
-      name="Close editor"
-    ></app-button>
-  </header>
-  @if (isImageChosen) {
-    <app-editor-canvas
-      [previewImage]="previewImage"
-      [appPreviewImageSettings]="appPreviewImageSettings"
-    />
-  } @else {
-    <app-image-upload
-      (setPreviewImage)="setPreviewImage($event)"
-      (isImageChosen)="onImageChosen($event)"
-    />
-  }
-  <app-editor-controls
-    [canvasElement]="canvasElement"
-    (sliderValueChange)="onSliderValueChange($event)"
-    [isImageChosen]="isImageChosen"
+<header class="editor-header">
+  <div class="editor-header-left">
+    <img width="30" height="30" [src]="greenEyeUrl" alt="" />
+    <h1 class="editor-headline">{{ title }}</h1>
+  </div>
+  <app-button
+    (close)="onCloseEditor()"
+    [imageSrc]="closeIconUrl"
+    name="Close editor"
+  ></app-button>
+</header>
+@if (isImageChosen) {
+  <app-editor-canvas
+    [previewImage]="previewImage"
+    [appPreviewImageSettings]="appPreviewImageSettings"
+    [selectedCategory]="selectedCategory"
+    [finalImage]="finalImage"
   />
-</div>
+} @else {
+  <app-image-upload
+    (setPreviewImage)="setPreviewImage($event)"
+    (isImageChosen)="onImageChosen($event)"
+  />
+}
+<app-editor-controls
+  [canvasElement]="canvasElement"
+  (sliderValueChange)="onSliderValueChange($event)"
+  [isImageChosen]="isImageChosen"
+/>
