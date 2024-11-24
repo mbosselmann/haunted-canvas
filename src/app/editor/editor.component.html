@@ -11,6 +11,7 @@
 </header>
 @if (isImageChosen) {
   <app-editor-canvas
+    [sticker]="sticker"
     [previewImage]="previewImage"
     [appPreviewImageSettings]="appPreviewImageSettings"
     [selectedCategory]="selectedCategory"
@@ -26,4 +27,6 @@
   [canvasElement]="canvasElement"
   (sliderValueChange)="onSliderValueChange($event)"
   [isImageChosen]="isImageChosen"
+  (selectedStickerChange)="onSelectedStickerChange($event)"
+  (selectedCategoryChange)="onSelectedCategoryChange($event)"
 />

@@ -36,6 +36,12 @@ export class EditorControlsComponent {
   @Output()
   sliderValueChange = new EventEmitter<PreviewImageSetting>();
 
+  @Output()
+  selectedStickerChange = new EventEmitter<SelectedSticker>();
+
+  @Output()
+  selectedCategoryChange = new EventEmitter<SelectedCategory>();
+
   onSliderValueChange(value: number) {
     if (
       this.selectedPreviewImageOptions &&
@@ -80,6 +86,20 @@ export class EditorControlsComponent {
               0,
           }
         : null;
+    }
+
+    if (this.selectedCategory === 'sticker') {
+      const foundSticker = categoryOptions[this.selectedCategory].find(
+        (sticker) => sticker.name === option,
+      )?.icon;
+
+      if (foundSticker) {
+        this.selectedStickerChange.emit({
+          id: crypto.randomUUID(),
+          src: '/assets/' + foundSticker + '.svg',
+        });
+      }
+    }
 
     if (
       this.selectedPreviewImageOptions &&
