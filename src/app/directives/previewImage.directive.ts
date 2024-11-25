@@ -36,12 +36,12 @@ export class PreviewImageSettingsDirective implements AfterViewInit, OnChanges {
     }
   }
 
-  ngOnChanges(changes: SimpleChanges) {
+  async ngOnChanges(changes: SimpleChanges) {
     if (
       changes['appPreviewImageSettings'] &&
       this.appPreviewImageSettings.length
     ) {
-      this.redrawContent();
+      await this.redrawContent();
     }
   }
 
@@ -49,37 +49,47 @@ export class PreviewImageSettingsDirective implements AfterViewInit, OnChanges {
     if (!this.ctx) {
       return;
     }
-    const image = await loadImage({
-      imageUrl: this.previewImage,
-      ctx: this.ctx,
-      appPreviewImageSettings: this.appPreviewImageSettings,
-    });
 
-    this.ctx.imageSmoothingEnabled = false;
-    this.ctx.imageSmoothingQuality = 'high';
-
-    this.ctx.drawImage(
-      image,
-      0,
-      0,
-      this.ctx.canvas.width,
-      this.ctx.canvas.height,
-    );
-  }
-
-  async ngAfterViewInit(): Promise<void> {
-    if (this.ctx) {
+    try {
+      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
       const image = await loadImage({
         imageUrl: this.previewImage,
         ctx: this.ctx,
         appPreviewImageSettings: this.appPreviewImageSettings,
       });
 
-      const { width, height } = setCanvasSize(this.canvas, image);
-
       this.ctx.imageSmoothingEnabled = false;
       this.ctx.imageSmoothingQuality = 'high';
-      this.ctx.drawImage(image, 0, 0, width, height);
+
+      this.ctx.drawImage(
+        image,
+        0,
+        0,
+        this.ctx.canvas.width,
+        this.ctx.canvas.height,
+      );
+    } catch (error) {
+      console.error('Error redrawing content', error);
+    }
+  }
+
+  async ngAfterViewInit(): Promise<void> {
+    if (this.ctx) {
+      try {
+        const image = await loadImage({
+          imageUrl: this.previewImage,
+          ctx: this.ctx,
+          appPreviewImageSettings: this.appPreviewImageSettings,
+        });
+
+        const { width, height } = setCanvasSize(this.canvas, image);
+
+        this.ctx.imageSmoothingEnabled = false;
+        this.ctx.imageSmoothingQuality = 'high';
+        this.ctx.drawImage(image, 0, 0, width, height);
+      } catch (error) {
+        console.error('Error loading image', error);
+      }
     }
   }
 }

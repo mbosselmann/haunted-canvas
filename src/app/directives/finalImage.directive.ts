@@ -35,9 +35,9 @@ export class FinalImageSettingsDirective implements OnChanges {
 
   constructor(private canvasElement: ElementRef<HTMLCanvasElement>) {}
 
-  ngOnChanges(changes: SimpleChanges): void {
+  async ngOnChanges(changes: SimpleChanges): Promise<void> {
     if (changes['finalImage'] || changes['stickers']) {
-      this.loadAllImages();
+      await this.loadAllImages();
     }
   }
 

@@ -123,6 +123,7 @@ export class EditorComponent implements AfterViewChecked {
         if (blob) {
           this.finalImage = URL.createObjectURL(blob);
           this.changeDetectorRef.detectChanges();
+          this.previewImage = this.finalImage;
         }
       });
     }
