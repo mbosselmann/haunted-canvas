@@ -3,18 +3,15 @@ import {
   PreviewImageSetting,
   PreviewImageSettingsDirective,
 } from '../directives/previewImage.directive';
-import { StickerDirective } from '../directives/sticker.directive';
-import { SelectedSticker } from '../editor-controls/editor-controls.component';
 import { SelectedCategory } from '../editor/editor.component';
-import { FinalImageSettingsDirective } from '../directives/finalImage.directive';
+import {
+  FinalImageSettingsDirective,
+  Sticker,
+} from '../directives/finalImage.directive';
 @Component({
   selector: 'app-editor-canvas',
   standalone: true,
-  imports: [
-    PreviewImageSettingsDirective,
-    StickerDirective,
-    FinalImageSettingsDirective,
-  ],
+  imports: [PreviewImageSettingsDirective, FinalImageSettingsDirective],
   templateUrl: './canvas.component.html',
   styleUrl: './canvas.component.css',
 })
@@ -32,7 +29,7 @@ export class CanvasComponent {
   previewImage!: string;
 
   @Input()
-  sticker!: SelectedSticker;
+  stickers: Sticker[] = [];
 
   @ViewChild('styleCanvas', { static: false })
   styleCanvas!: ElementRef<HTMLCanvasElement>;

@@ -14,6 +14,7 @@ import {
 import { ImageUploadComponent } from '../image-upload-form/image-upload-form.component';
 import { PreviewImageSetting } from '../directives/previewImage.directive';
 import { ButtonComponent } from '../button/button.component';
+import { Sticker } from '../directives/finalImage.directive';
 
 export type Categories = ['settings', 'sticker', 'save'];
 
@@ -40,7 +41,7 @@ export class EditorComponent implements AfterViewChecked {
   categories: Categories = ['settings', 'sticker', 'save'];
   selectedCategory: SelectedCategory = 'settings';
   appPreviewImageSettings: PreviewImageSetting[] = [];
-  sticker: SelectedSticker = { id: '', src: '' };
+  stickers: Sticker[] = [];
 
   @Output()
   closeEditor = new EventEmitter<boolean>();
@@ -72,7 +73,7 @@ export class EditorComponent implements AfterViewChecked {
     this.isImageChosen = false;
     this.appPreviewImageSettings = [];
     this.previewImage = '';
-    this.sticker = { id: '', src: '' };
+    this.stickers = [];
   }
 
   onImageChosen(isImageChosen: boolean) {
@@ -99,7 +100,16 @@ export class EditorComponent implements AfterViewChecked {
   }
 
   onSelectedStickerChange(sticker: SelectedSticker) {
-    this.sticker = sticker;
+    this.stickers = [
+      ...this.stickers,
+      {
+        ...sticker,
+        x: this.canvasElement.width / 2 - 100,
+        y: this.canvasElement.height / 2 - 100,
+        width: 200,
+        height: 200,
+      },
+    ];
   }
 
   onCategoryChange(category: SelectedCategory) {
