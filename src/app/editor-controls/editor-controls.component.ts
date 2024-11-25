@@ -101,15 +101,13 @@ export class EditorControlsComponent {
       }
     }
 
-    if (
-      this.selectedPreviewImageOptions &&
-      this.selectedPreviewImageOptions.name === 'Save'
-    ) {
+    if (this.selectedCategory === 'save') {
       this.saveCanvas();
     }
   }
 
   saveCanvas() {
+    console.log(this.canvasElement);
     if (this.canvasElement) {
       const dataUrl = this.canvasElement.toDataURL('image/png');
       const link = document.createElement('a');
