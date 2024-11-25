@@ -7,7 +7,6 @@ import { StickerDirective } from '../directives/sticker.directive';
 import { SelectedSticker } from '../editor-controls/editor-controls.component';
 import { SelectedCategory } from '../editor/editor.component';
 import { FinalImageSettingsDirective } from '../directives/finalImage.directive';
-
 @Component({
   selector: 'app-editor-canvas',
   standalone: true,
@@ -35,6 +34,8 @@ export class CanvasComponent {
   @Input()
   sticker!: SelectedSticker;
 
-  @ViewChild('canvas', { read: ElementRef })
-  canvas!: ElementRef<HTMLCanvasElement>;
+  @ViewChild('styleCanvas', { static: false })
+  styleCanvas!: ElementRef<HTMLCanvasElement>;
+  @ViewChild('finalCanvas', { static: false })
+  finalCanvas!: ElementRef<HTMLCanvasElement>;
 }

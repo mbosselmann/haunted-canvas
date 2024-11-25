@@ -7,7 +7,6 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { CategoryOption } from '../model/categoryOption';
-import { SelectedSticker } from '../editor-controls/editor-controls.component';
 import { applyImageSettings } from './helper/applyImageSettings';
 import { loadImageToCanvas } from './helper/loadImage';
 
@@ -26,9 +25,6 @@ export class PreviewImageSettingsDirective implements AfterViewInit, OnChanges {
   @Input()
   previewImage!: string;
 
-  @Input()
-  sticker!: SelectedSticker;
-
   constructor(private canvasElement: ElementRef<HTMLCanvasElement>) {}
 
   ngOnChanges(changes: SimpleChanges) {
@@ -36,10 +32,6 @@ export class PreviewImageSettingsDirective implements AfterViewInit, OnChanges {
       changes['appPreviewImageSettings'] &&
       this.appPreviewImageSettings.length
     ) {
-      this.redrawContent();
-    }
-
-    if (changes['sticker'] && changes['sticker'].currentValue.id) {
       this.redrawContent();
     }
   }

@@ -5,7 +5,7 @@ import { applyImageSettings } from './applyImageSettings';
 export function loadImageToCanvas(
   imageUrl: string,
   canvasElement: ElementRef<HTMLCanvasElement>,
-  appPreviewImageSettings: PreviewImageSetting[],
+  appPreviewImageSettings?: PreviewImageSetting[],
 ) {
   const canvas = canvasElement.nativeElement;
   const ctx = canvas.getContext('2d');
@@ -29,7 +29,7 @@ export function loadImageToCanvas(
       }
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      if (appPreviewImageSettings.length) {
+      if (appPreviewImageSettings?.length) {
         applyImageSettings(ctx, appPreviewImageSettings);
       }
 

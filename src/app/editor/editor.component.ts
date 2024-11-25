@@ -58,8 +58,12 @@ export class EditorComponent implements AfterViewChecked {
   }
 
   setCanvasElement() {
-    if (this.canvasComponent && this.canvasComponent.canvas) {
-      this.canvasElement = this.canvasComponent.canvas.nativeElement;
+    if (this.canvasComponent && this.canvasComponent?.styleCanvas) {
+      this.canvasElement = this.canvasComponent.styleCanvas.nativeElement;
+    }
+
+    if (this.canvasComponent && this.canvasComponent?.finalCanvas) {
+      this.canvasElement = this.canvasComponent.finalCanvas.nativeElement;
     }
   }
 
@@ -98,7 +102,19 @@ export class EditorComponent implements AfterViewChecked {
     this.sticker = sticker;
   }
 
-  onSelectedCategoryChange(category: SelectedCategory) {
+  onCategoryChange(category: SelectedCategory) {
     this.selectedCategory = this.selectedCategory === category ? '' : category;
+    this.updateFinalImageUrl();
+  }
+
+  private updateFinalImageUrl() {
+    if (this.canvasElement) {
+      this.canvasElement.toBlob((blob) => {
+        if (blob) {
+          this.finalImage = URL.createObjectURL(blob);
+          this.changeDetectorRef.detectChanges();
+        }
+      });
+    }
   }
 }

@@ -40,7 +40,7 @@ export class EditorControlsComponent {
   selectedStickerChange = new EventEmitter<SelectedSticker>();
 
   @Output()
-  selectedCategoryChange = new EventEmitter<SelectedCategory>();
+  categoryChange = new EventEmitter<SelectedCategory>();
 
   onSliderValueChange(value: number) {
     if (
@@ -64,7 +64,7 @@ export class EditorControlsComponent {
   onSelectCategory(category: SelectedCategory) {
     this.selectedCategory = this.selectedCategory === category ? '' : category;
     this.selectedPreviewImageOptions = null;
-    this.selectedCategoryChange.emit(this.selectedCategory);
+    this.categoryChange.emit(this.selectedCategory);
   }
 
   onSelectOption(option: string) {
