@@ -7,8 +7,8 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { CategoryOption } from '../model/categoryOption';
-import { applyImageSettings } from './helper/applyImageSettings';
-import { loadImageToCanvas } from './helper/loadImage';
+import { loadImage } from './helper/loadImage';
+import { setCanvasSize } from './helper/setCanvasSize';
 
 export interface PreviewImageSetting extends CategoryOption {
   value: number;
@@ -25,7 +25,16 @@ export class PreviewImageSettingsDirective implements AfterViewInit, OnChanges {
   @Input()
   previewImage!: string;
 
-  constructor(private canvasElement: ElementRef<HTMLCanvasElement>) {}
+  canvas: HTMLCanvasElement;
+  ctx!: CanvasRenderingContext2D;
+
+  constructor(private canvasElement: ElementRef<HTMLCanvasElement>) {
+    this.canvas = this.canvasElement.nativeElement;
+    const context = this.canvas.getContext('2d');
+    if (context) {
+      this.ctx = context;
+    }
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     if (
@@ -36,31 +45,41 @@ export class PreviewImageSettingsDirective implements AfterViewInit, OnChanges {
     }
   }
 
-  private redrawContent() {
-    const canvas = this.canvasElement.nativeElement;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) {
+  private async redrawContent() {
+    if (!this.ctx) {
       return;
     }
-    const image = new Image();
-    image.src = this.previewImage;
-    image.onload = () => {
-      if (
-        this.appPreviewImageSettings &&
-        this.appPreviewImageSettings.length > 0
-      ) {
-        applyImageSettings(ctx, this.appPreviewImageSettings);
-      }
-      ctx.imageSmoothingEnabled = false;
-      ctx.drawImage(image, 0, 0, ctx.canvas.width, ctx.canvas.height);
-    };
+    const image = await loadImage({
+      imageUrl: this.previewImage,
+      ctx: this.ctx,
+      appPreviewImageSettings: this.appPreviewImageSettings,
+    });
+
+    this.ctx.imageSmoothingEnabled = false;
+    this.ctx.imageSmoothingQuality = 'high';
+
+    this.ctx.drawImage(
+      image,
+      0,
+      0,
+      this.ctx.canvas.width,
+      this.ctx.canvas.height,
+    );
   }
 
-  ngAfterViewInit(): void {
-    loadImageToCanvas(
-      this.previewImage,
-      this.canvasElement,
-      this.appPreviewImageSettings,
-    );
+  async ngAfterViewInit(): Promise<void> {
+    if (this.ctx) {
+      const image = await loadImage({
+        imageUrl: this.previewImage,
+        ctx: this.ctx,
+        appPreviewImageSettings: this.appPreviewImageSettings,
+      });
+
+      const { width, height } = setCanvasSize(this.canvas, image);
+
+      this.ctx.imageSmoothingEnabled = false;
+      this.ctx.imageSmoothingQuality = 'high';
+      this.ctx.drawImage(image, 0, 0, width, height);
+    }
   }
 }
