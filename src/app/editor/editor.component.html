@@ -9,7 +9,7 @@
     name="Close editor"
   ></app-button>
 </header>
-@if (isImageChosen) {
+@if (previewImage) {
   <app-editor-canvas
     #canvasComponent
     [stickers]="stickers"
@@ -19,15 +19,12 @@
     [finalImage]="finalImage"
   />
 } @else {
-  <app-image-upload
-    (setPreviewImage)="setPreviewImage($event)"
-    (isImageChosen)="onImageChosen($event)"
-  />
+  <app-image-upload (setPreviewImage)="setPreviewImage($event)" />
 }
 <app-editor-controls
   [canvasElement]="canvasElement"
   (sliderValueChange)="onSliderValueChange($event)"
-  [isImageChosen]="isImageChosen"
+  [isImageChosen]="!!previewImage || !!finalImage"
   (selectedStickerChange)="onSelectedStickerChange($event)"
   (categoryChange)="onCategoryChange($event)"
 />

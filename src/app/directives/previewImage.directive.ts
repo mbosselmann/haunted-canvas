@@ -7,8 +7,8 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { CategoryOption } from '../model/categoryOption';
-import { loadImage } from './helper/loadImage';
 import { setCanvasSize } from './helper/setCanvasSize';
+import { applyImageSettings } from './helper/applyImageSettings';
 
 export interface PreviewImageSetting extends CategoryOption {
   value: number;
@@ -23,7 +23,7 @@ export class PreviewImageSettingsDirective implements AfterViewInit, OnChanges {
   appPreviewImageSettings!: PreviewImageSetting[];
 
   @Input()
-  previewImage!: string;
+  previewImage!: HTMLImageElement;
 
   canvas: HTMLCanvasElement;
   ctx!: CanvasRenderingContext2D;
@@ -52,17 +52,16 @@ export class PreviewImageSettingsDirective implements AfterViewInit, OnChanges {
 
     try {
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-      const image = await loadImage({
-        imageUrl: this.previewImage,
-        ctx: this.ctx,
-        appPreviewImageSettings: this.appPreviewImageSettings,
-      });
 
       this.ctx.imageSmoothingEnabled = false;
       this.ctx.imageSmoothingQuality = 'high';
 
+      if (this.appPreviewImageSettings?.length && this.ctx) {
+        applyImageSettings(this.ctx, this.appPreviewImageSettings);
+      }
+
       this.ctx.drawImage(
-        image,
+        this.previewImage,
         0,
         0,
         this.ctx.canvas.width,
@@ -76,17 +75,15 @@ export class PreviewImageSettingsDirective implements AfterViewInit, OnChanges {
   async ngAfterViewInit(): Promise<void> {
     if (this.ctx) {
       try {
-        const image = await loadImage({
-          imageUrl: this.previewImage,
-          ctx: this.ctx,
-          appPreviewImageSettings: this.appPreviewImageSettings,
-        });
+        const { width, height } = setCanvasSize(this.canvas, this.previewImage);
 
-        const { width, height } = setCanvasSize(this.canvas, image);
+        if (this.appPreviewImageSettings?.length && this.ctx) {
+          applyImageSettings(this.ctx, this.appPreviewImageSettings);
+        }
 
         this.ctx.imageSmoothingEnabled = false;
         this.ctx.imageSmoothingQuality = 'high';
-        this.ctx.drawImage(image, 0, 0, width, height);
+        this.ctx.drawImage(this.previewImage, 0, 0, width, height);
       } catch (error) {
         console.error('Error loading image', error);
       }

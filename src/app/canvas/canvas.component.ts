@@ -26,7 +26,7 @@ export class CanvasComponent {
   appPreviewImageSettings!: PreviewImageSetting[];
 
   @Input()
-  previewImage!: string;
+  previewImage!: HTMLImageElement;
 
   @Input()
   stickers: Sticker[] = [];

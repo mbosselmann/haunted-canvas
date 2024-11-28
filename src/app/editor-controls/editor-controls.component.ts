@@ -107,7 +107,6 @@ export class EditorControlsComponent {
   }
 
   saveCanvas() {
-    console.log(this.canvasElement);
     if (this.canvasElement) {
       const dataUrl = this.canvasElement.toDataURL('image/png');
       const link = document.createElement('a');

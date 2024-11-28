@@ -15,9 +15,6 @@ export class ImageUploadComponent {
   errorActionMessage = '';
 
   @Output()
-  isImageChosen = new EventEmitter<boolean>();
-
-  @Output()
   setPreviewImage = new EventEmitter<string>();
 
   onSubmit(event: Event) {
@@ -35,14 +32,12 @@ export class ImageUploadComponent {
     if (file.size > maxSizeInBytes) {
       this.errorMessage = 'Your image file size exceeds 5MB.';
       this.errorActionMessage = 'Please choose a smaller image file.';
-      this.isImageChosen.emit(false);
       return;
     }
 
     if (!input.files?.[0]) return;
     const previewImageUrl = URL.createObjectURL(input.files?.[0]);
 
-    this.isImageChosen.emit(true);
     this.setPreviewImage.emit(previewImageUrl);
   }
 }
