@@ -18,6 +18,7 @@
       >
         <img
           class="option-image"
+          [ngClass]="{ 'sticker-icon': selectedCategory === 'sticker' }"
           [src]="'/assets/' + option.icon + '.svg'"
           [alt]="option.name"
         />
@@ -34,7 +35,11 @@
         (click)="onSelectCategory(category)"
         [appActive]="selectedCategory === category"
       >
-        {{ category }}
+        <img
+          class="category-image"
+          [src]="'/assets/' + category + '-icon.svg'"
+          [alt]="category"
+        />
       </button>
     }
   }

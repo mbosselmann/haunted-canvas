@@ -38,3 +38,12 @@
 .active {
   background: #3a015c;
 }
+
+.category-image {
+  height: 30px;
+}
+
+.category-image[alt="sticker"],
+.sticker-icon {
+  filter: drop-shadow(0 0 0.75rem #fef8f880);
+}

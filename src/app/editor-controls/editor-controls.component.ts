@@ -5,6 +5,7 @@ import { EditorSliderComponent } from '../editor-slider/editor-slider.component'
 import { ActiveDirective } from '../directives/active.directive';
 import { PreviewImageSetting } from '../directives/previewImage.directive';
 import { Categories, SelectedCategory } from '../editor/editor.component';
+import { CommonModule } from '@angular/common';
 
 export interface SelectedSticker {
   id: string;
@@ -13,7 +14,7 @@ export interface SelectedSticker {
 @Component({
   selector: 'app-editor-controls',
   standalone: true,
-  imports: [EditorSliderComponent, ActiveDirective],
+  imports: [EditorSliderComponent, ActiveDirective, CommonModule],
   templateUrl: './editor-controls.component.html',
   styleUrl: './editor-controls.component.css',
 })
