@@ -31,8 +31,6 @@ export interface Sticker {
   providedIn: 'root',
 })
 export class CanvasService {
-  image: HTMLImageElement | null = null;
-
   async loadImage(imageUrl: string): Promise<HTMLImageElement> {
     return loadImage(imageUrl);
   }
@@ -108,7 +106,7 @@ export class CanvasService {
         }
       });
     } catch (error) {
-      console.error('Error loading images', error);
+      console.error('Error loading image and stickers', error);
     }
   }
 
@@ -120,31 +118,28 @@ export class CanvasService {
     const ctx = canvas.getContext('2d');
 
     if (!ctx) {
+      console.error('Canvas context is not available. Exiting drawImage');
       return;
     }
 
-    try {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      const { width, height } = setCanvasSize(canvas, previewImage);
+    const { width, height } = setCanvasSize(canvas, previewImage);
 
-      ctx.imageSmoothingEnabled = false;
-      ctx.imageSmoothingQuality = 'high';
+    ctx.imageSmoothingEnabled = false;
+    ctx.imageSmoothingQuality = 'high';
 
-      if (appPreviewImageSettings?.length && ctx) {
-        applyImageSettings(ctx, appPreviewImageSettings);
-      }
-
-      this.drawElement({
-        ctx,
-        image: previewImage,
-        x: 0,
-        y: 0,
-        width: width,
-        height: height,
-      });
-    } catch (error) {
-      console.error('Error drawing image', error);
+    if (appPreviewImageSettings?.length && ctx) {
+      applyImageSettings(ctx, appPreviewImageSettings);
     }
+
+    this.drawElement({
+      ctx,
+      image: previewImage,
+      x: 0,
+      y: 0,
+      width: width,
+      height: height,
+    });
   }
 }
