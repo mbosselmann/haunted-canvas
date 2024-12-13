@@ -7,8 +7,8 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { CategoryOption } from '../model/categoryOption';
-import { setCanvasSize } from './helper/setCanvasSize';
-import { applyImageSettings } from './helper/applyImageSettings';
+import { setCanvasSize } from '../helper/setCanvasSize';
+import { applyImageSettings } from '../helper/applyImageSettings';
 
 export interface PreviewImageSetting extends CategoryOption {
   value: number;

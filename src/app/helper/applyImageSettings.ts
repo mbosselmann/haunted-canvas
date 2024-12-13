@@ -1,4 +1,4 @@
-import { PreviewImageSetting } from '../previewImage.directive';
+import { PreviewImageSetting } from '../directives/previewImage.directive';
 
 export function applyImageSettings(
   ctx: CanvasRenderingContext2D,

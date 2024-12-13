@@ -6,8 +6,8 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { CategoryOption } from '../model/categoryOption';
-import { loadImage } from './helper/loadImage';
-import { setCanvasSize } from './helper/setCanvasSize';
+import { loadImage } from '../helper/loadImage';
+import { setCanvasSize } from '../helper/setCanvasSize';
 
 export interface FinalImageSetting extends CategoryOption {
   value: number;
@@ -56,7 +56,7 @@ export class FinalImageSettingsDirective implements OnChanges {
       ];
 
       const images = await Promise.all(
-        imageSources.map((imageUrl) => loadImage({ imageUrl })),
+        imageSources.map((imageUrl) => loadImage(imageUrl)),
       );
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);

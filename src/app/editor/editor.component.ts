@@ -15,7 +15,7 @@ import { ImageUploadComponent } from '../image-upload-form/image-upload-form.com
 import { PreviewImageSetting } from '../directives/previewImage.directive';
 import { ButtonComponent } from '../button/button.component';
 import { Sticker } from '../directives/finalImage.directive';
-import { loadImage } from '../directives/helper/loadImage';
+import { loadImage } from '../helper/loadImage';
 
 export type Categories = ['settings', 'sticker', 'save'];
 
@@ -37,6 +37,7 @@ export class EditorComponent implements AfterViewChecked {
   closeIconUrl = 'assets/close-icon.svg';
   greenEyeUrl = 'assets/green-eye.png';
   previewImage: HTMLImageElement | null = null;
+  imageSources: string[] = [];
   finalImage = '';
   categories: Categories = ['settings', 'sticker', 'save'];
   selectedCategory: SelectedCategory = 'settings';
@@ -54,7 +55,7 @@ export class EditorComponent implements AfterViewChecked {
 
   constructor(private changeDetectorRef: ChangeDetectorRef) {}
 
-  ngAfterViewChecked() {
+  async ngAfterViewChecked() {
     this.setCanvasElement();
     this.changeDetectorRef.detectChanges();
 
@@ -84,11 +85,7 @@ export class EditorComponent implements AfterViewChecked {
   }
 
   async setPreviewImage(previewImage: string) {
-    const image = await loadImage({
-      imageUrl: previewImage,
-      appPreviewImageSettings: this.appPreviewImageSettings,
-      ctx: this.ctx,
-    });
+    const image = await loadImage(previewImage);
 
     this.previewImage = image;
   }
