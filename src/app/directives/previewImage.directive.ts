@@ -7,8 +7,7 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { CategoryOption } from '../model/categoryOption';
-import { setCanvasSize } from '../helper/setCanvasSize';
-import { applyImageSettings } from '../helper/applyImageSettings';
+import { CanvasService } from '../services/canvas.service';
 
 export interface PreviewImageSetting extends CategoryOption {
   value: number;
@@ -25,68 +24,31 @@ export class PreviewImageSettingsDirective implements AfterViewInit, OnChanges {
   @Input()
   previewImage!: HTMLImageElement;
 
-  canvas: HTMLCanvasElement;
-  ctx!: CanvasRenderingContext2D;
+  constructor(
+    private canvasElement: ElementRef<HTMLCanvasElement>,
+    private canvasService: CanvasService,
+  ) {}
 
-  constructor(private canvasElement: ElementRef<HTMLCanvasElement>) {
-    this.canvas = this.canvasElement.nativeElement;
-    const context = this.canvas.getContext('2d');
-    if (context) {
-      this.ctx = context;
-    }
-  }
-
-  async ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges(changes: SimpleChanges) {
     if (
       changes['appPreviewImageSettings'] &&
       this.appPreviewImageSettings.length
     ) {
-      await this.redrawContent();
+      this.canvasService.drawImage({
+        canvas: this.canvasElement.nativeElement,
+        previewImage: this.previewImage,
+        appPreviewImageSettings: this.appPreviewImageSettings,
+      });
     }
   }
 
-  private async redrawContent() {
-    if (!this.ctx) {
-      return;
-    }
-
-    try {
-      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
-      this.ctx.imageSmoothingEnabled = false;
-      this.ctx.imageSmoothingQuality = 'high';
-
-      if (this.appPreviewImageSettings?.length && this.ctx) {
-        applyImageSettings(this.ctx, this.appPreviewImageSettings);
-      }
-
-      this.ctx.drawImage(
-        this.previewImage,
-        0,
-        0,
-        this.ctx.canvas.width,
-        this.ctx.canvas.height,
-      );
-    } catch (error) {
-      console.error('Error redrawing content', error);
-    }
-  }
-
-  async ngAfterViewInit(): Promise<void> {
-    if (this.ctx) {
-      try {
-        const { width, height } = setCanvasSize(this.canvas, this.previewImage);
-
-        if (this.appPreviewImageSettings?.length && this.ctx) {
-          applyImageSettings(this.ctx, this.appPreviewImageSettings);
-        }
-
-        this.ctx.imageSmoothingEnabled = false;
-        this.ctx.imageSmoothingQuality = 'high';
-        this.ctx.drawImage(this.previewImage, 0, 0, width, height);
-      } catch (error) {
-        console.error('Error loading image', error);
-      }
+  ngAfterViewInit() {
+    if (this.previewImage) {
+      this.canvasService.drawImage({
+        canvas: this.canvasElement.nativeElement,
+        previewImage: this.previewImage,
+        appPreviewImageSettings: this.appPreviewImageSettings,
+      });
     }
   }
 }

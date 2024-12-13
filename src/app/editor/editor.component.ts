@@ -14,8 +14,8 @@ import {
 import { ImageUploadComponent } from '../image-upload-form/image-upload-form.component';
 import { PreviewImageSetting } from '../directives/previewImage.directive';
 import { ButtonComponent } from '../button/button.component';
-import { Sticker } from '../directives/finalImage.directive';
 import { loadImage } from '../helper/loadImage';
+import { Sticker } from '../services/canvas.service';
 
 export type Categories = ['settings', 'sticker', 'save'];
 

@@ -4,10 +4,8 @@ import {
   PreviewImageSettingsDirective,
 } from '../directives/previewImage.directive';
 import { SelectedCategory } from '../editor/editor.component';
-import {
-  FinalImageSettingsDirective,
-  Sticker,
-} from '../directives/finalImage.directive';
+import { FinalImageSettingsDirective } from '../directives/finalImage.directive';
+import { Sticker } from '../services/canvas.service';
 @Component({
   selector: 'app-editor-canvas',
   standalone: true,
