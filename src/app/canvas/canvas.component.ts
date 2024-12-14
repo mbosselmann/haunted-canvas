@@ -1,15 +1,12 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
-import {
-  PreviewImageSetting,
-  PreviewImageSettingsDirective,
-} from '../directives/previewImage.directive';
-import { SelectedCategory } from '../editor/editor.component';
-import { FinalImageSettingsDirective } from '../directives/finalImage.directive';
-import { Sticker } from '../services/canvas.service';
+import { LoadedSticker, SelectedSticker } from '../model/sticker';
+import { ImageDirective } from '../directives/image.directive';
+import { ImageSetting } from '../model/image';
+import { SelectedCategory } from '../model/category';
 @Component({
   selector: 'app-editor-canvas',
   standalone: true,
-  imports: [PreviewImageSettingsDirective, FinalImageSettingsDirective],
+  imports: [ImageDirective],
   templateUrl: './canvas.component.html',
   styleUrl: './canvas.component.css',
 })
@@ -18,16 +15,19 @@ export class CanvasComponent {
   selectedCategory!: SelectedCategory;
 
   @Input()
-  finalImage!: string;
+  finalImage!: HTMLImageElement;
 
   @Input()
-  appPreviewImageSettings!: PreviewImageSetting[];
+  appPreviewImageSettings!: ImageSetting[];
 
   @Input()
   previewImage!: HTMLImageElement;
 
   @Input()
-  stickers: Sticker[] = [];
+  stickers!: LoadedSticker[];
+
+  @Input()
+  selectedStickers!: SelectedSticker[];
 
   @ViewChild('styleCanvas', { static: false })
   styleCanvas!: ElementRef<HTMLCanvasElement>;

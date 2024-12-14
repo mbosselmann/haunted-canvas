@@ -1,16 +1,15 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { CategoryOptions } from '../model/categoryOption';
+import {
+  Categories,
+  CategoryOptions,
+  SelectedCategory,
+} from '../model/category';
 import { categoryOptions } from '../data/categoryOptions';
 import { EditorSliderComponent } from '../editor-slider/editor-slider.component';
 import { ActiveDirective } from '../directives/active.directive';
-import { PreviewImageSetting } from '../directives/previewImage.directive';
-import { Categories, SelectedCategory } from '../editor/editor.component';
 import { CommonModule } from '@angular/common';
+import { ImageSetting } from '../model/image';
 
-export interface SelectedSticker {
-  id: string;
-  src: string;
-}
 @Component({
   selector: 'app-editor-controls',
   standalone: true,
@@ -19,14 +18,14 @@ export interface SelectedSticker {
   styleUrl: './editor-controls.component.css',
 })
 export class EditorControlsComponent {
-  selectedPreviewImageOptions: PreviewImageSetting | null = null;
+  selectedPreviewImageOptions: ImageSetting | null = null;
   categoryOptions: CategoryOptions = categoryOptions;
 
   @Input()
   selectedCategory: SelectedCategory = 'settings';
 
   @Input()
-  categories: Categories = ['settings', 'sticker', 'save'];
+  categories: Categories = ['settings', 'stickers', 'save'];
 
   @Input()
   isImageChosen = false;
@@ -35,10 +34,10 @@ export class EditorControlsComponent {
   canvasElement!: HTMLCanvasElement;
 
   @Output()
-  sliderValueChange = new EventEmitter<PreviewImageSetting>();
+  sliderValueChange = new EventEmitter<ImageSetting>();
 
   @Output()
-  selectedStickerChange = new EventEmitter<SelectedSticker>();
+  selectedStickerChange = new EventEmitter<{ id: string; name: string }>();
 
   @Output()
   categoryChange = new EventEmitter<SelectedCategory>();
@@ -89,15 +88,15 @@ export class EditorControlsComponent {
         : null;
     }
 
-    if (this.selectedCategory === 'sticker') {
-      const foundSticker = categoryOptions[this.selectedCategory].find(
+    if (this.selectedCategory === 'stickers') {
+      const stickerName = categoryOptions[this.selectedCategory].find(
         (sticker) => sticker.name === option,
-      )?.icon;
+      )?.name;
 
-      if (foundSticker) {
+      if (stickerName) {
         this.selectedStickerChange.emit({
           id: crypto.randomUUID(),
-          src: '/assets/' + foundSticker + '.svg',
+          name: stickerName,
         });
       }
     }

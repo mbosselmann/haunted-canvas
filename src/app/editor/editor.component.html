@@ -9,14 +9,15 @@
     name="Close editor"
   ></app-button>
 </header>
-@if (previewImage) {
+@if (previewImage || finalImage) {
   <app-editor-canvas
     #canvasComponent
     [stickers]="stickers"
-    [previewImage]="previewImage"
+    [selectedStickers]="selectedStickers"
+    [previewImage]="previewImage!"
     [appPreviewImageSettings]="appPreviewImageSettings"
     [selectedCategory]="selectedCategory"
-    [finalImage]="finalImage"
+    [finalImage]="finalImage!"
   />
 } @else {
   <app-image-upload (setPreviewImage)="setPreviewImage($event)" />
