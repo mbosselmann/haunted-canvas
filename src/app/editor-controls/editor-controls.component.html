@@ -18,8 +18,8 @@
       >
         <img
           class="option-image"
-          [ngClass]="{ 'sticker-icon': selectedCategory === 'sticker' }"
-          [src]="'/assets/' + option.icon + '.svg'"
+          [ngClass]="{ 'sticker-icon': selectedCategory === 'stickers' }"
+          [src]="option.src"
           [alt]="option.name"
         />
       </button>

@@ -1,4 +1,4 @@
-import { CategoryOption } from '../model/categoryOption';
+import { CategoryOption } from '../model/category';
 
 export const categoryOptions: Record<string, CategoryOption[]> = {
   settings: [
@@ -10,6 +10,7 @@ export const categoryOptions: Record<string, CategoryOption[]> = {
       defaultValue: 100,
       minValue: 0,
       maxValue: 200,
+      src: '/assets/brightness-icon.svg',
     },
     {
       id: 2,
@@ -19,6 +20,7 @@ export const categoryOptions: Record<string, CategoryOption[]> = {
       defaultValue: 100,
       minValue: 0,
       maxValue: 200,
+      src: '/assets/contrast-icon.svg',
     },
     {
       id: 3,
@@ -28,6 +30,7 @@ export const categoryOptions: Record<string, CategoryOption[]> = {
       defaultValue: 100,
       minValue: 0,
       maxValue: 200,
+      src: '/assets/saturation-icon.svg',
     },
     {
       id: 4,
@@ -37,6 +40,7 @@ export const categoryOptions: Record<string, CategoryOption[]> = {
       defaultValue: 0,
       minValue: 0,
       maxValue: 100,
+      src: '/assets/inversion-icon.svg',
     },
     {
       id: 5,
@@ -46,6 +50,7 @@ export const categoryOptions: Record<string, CategoryOption[]> = {
       defaultValue: 0,
       minValue: 0,
       maxValue: 20,
+      src: '/assets/blur-icon.svg',
     },
     {
       id: 6,
@@ -55,146 +60,156 @@ export const categoryOptions: Record<string, CategoryOption[]> = {
       defaultValue: 0,
       minValue: 0,
       maxValue: 100,
+      src: '/assets/sepia-icon.svg',
     },
-    // {
-    //   id: 7,
-    //   name: 'Rotate',
-    //   icon: 'rotate-icon',
-    //   type: 'settings',
-    // },
-    // {
-    //   id: 8,
-    //   name: 'Flip',
-    //   icon: 'flip-icon',
-    //   type: 'settings',
-    // },
   ],
-  sticker: [
+  stickers: [
     {
       id: 1,
       name: 'Ghost',
       icon: 'stickers/ghost',
       type: 'sticker',
+      src: '/assets/stickers/ghost.svg',
     },
     {
       id: 2,
       name: 'Ghost 2',
       icon: 'stickers/ghost-2',
       type: 'sticker',
+      src: '/assets/stickers/ghost-2.svg',
     },
     {
       id: 3,
       name: 'Ghost 3',
       icon: 'stickers/ghost-3',
       type: 'sticker',
+      src: '/assets/stickers/ghost-3.svg',
     },
     {
       id: 4,
       name: 'Ghost 4',
       icon: 'stickers/ghost-4',
       type: 'sticker',
+      src: '/assets/stickers/ghost-4.svg',
     },
     {
       id: 5,
       name: 'Blue Eye',
       icon: 'stickers/blue-eye',
       type: 'sticker',
+      src: '/assets/stickers/blue-eye.svg',
     },
     {
       id: 6,
       name: 'Red Eye',
       icon: 'stickers/red-eye',
       type: 'sticker',
+      src: '/assets/stickers/red-eye.svg',
     },
     {
       id: 7,
       name: 'Green Eye',
       icon: 'stickers/green-eye',
       type: 'sticker',
+      src: '/assets/stickers/green-eye.svg',
     },
     {
       id: 8,
       name: 'Pink Eye',
       icon: 'stickers/pink-eye',
       type: 'sticker',
+      src: '/assets/stickers/pink-eye.svg',
     },
     {
       id: 9,
       name: 'Monster',
       icon: 'stickers/monster',
       type: 'sticker',
+      src: '/assets/stickers/monster.svg',
     },
     {
       id: 10,
       name: 'Cat',
       icon: 'stickers/cat',
       type: 'sticker',
+      src: '/assets/stickers/cat.svg',
     },
     {
       id: 11,
       name: 'Cat 2',
       icon: 'stickers/cat-2',
       type: 'sticker',
+      src: '/assets/stickers/cat-2.svg',
     },
     {
       id: 12,
       name: 'Moon',
       icon: 'stickers/moon',
       type: 'sticker',
+      src: '/assets/stickers/moon.svg',
     },
     {
       id: 13,
       name: 'Shape',
       icon: 'stickers/shape',
       type: 'sticker',
+      src: '/assets/stickers/shape.svg',
     },
     {
       id: 14,
       name: 'Star',
       icon: 'stickers/star',
       type: 'sticker',
+      src: '/assets/stickers/star.svg',
     },
     {
       id: 15,
       name: 'Pumpkin',
       icon: 'stickers/pumpkin',
       type: 'sticker',
+      src: '/assets/stickers/pumpkin.svg',
     },
     {
       id: 16,
       name: 'Spider net',
       icon: 'stickers/spider-net',
       type: 'sticker',
+      src: '/assets/stickers/spider-net.svg',
     },
     {
       id: 17,
       name: 'Mushroom',
       icon: 'stickers/mushroom',
       type: 'sticker',
+      src: '/assets/stickers/mushroom.svg',
     },
     {
       id: 18,
       name: 'Fence',
       icon: 'stickers/fence',
       type: 'sticker',
+      src: '/assets/stickers/fence.svg',
     },
     {
       id: 19,
       name: 'Circle',
       icon: 'stickers/circle',
       type: 'sticker',
+      src: '/assets/stickers/circle.svg',
     },
     {
       id: 20,
       name: 'Circle 2',
       icon: 'stickers/circle-2',
       type: 'sticker',
+      src: '/assets/stickers/circle-2.svg',
     },
     {
       id: 21,
       name: 'Light',
       icon: 'stickers/light',
       type: 'sticker',
+      src: '/assets/stickers/light.svg',
     },
   ],
   save: [
@@ -203,12 +218,14 @@ export const categoryOptions: Record<string, CategoryOption[]> = {
       name: 'Save',
       icon: 'download-icon',
       type: 'save',
+      src: '/assets/download-icon.svg',
     },
     {
       id: 2,
       name: 'Share',
       icon: 'share-icon',
       type: 'save',
+      src: '/assets/share-icon.svg',
     },
   ],
 };
