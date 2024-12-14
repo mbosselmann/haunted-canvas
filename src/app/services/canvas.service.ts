@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { loadImage } from '../helper/loadImage';
 import { setCanvasSize } from '../helper/setCanvasSize';
 import { applyImageSettings } from '../helper/applyImageSettings';
-import { PreviewImageSetting } from '../directives/previewImage.directive';
+import { CategoryOption } from '../model/category';
+import { LoadedSticker, SelectedSticker } from '../model/sticker';
+import { ImageSetting } from '../model/image';
 
 interface DrawElementParameters {
   ctx: CanvasRenderingContext2D;
@@ -14,17 +16,8 @@ interface DrawElementParameters {
 }
 interface DrawImageParameters {
   canvas: HTMLCanvasElement;
-  previewImage: HTMLImageElement;
-  appPreviewImageSettings: PreviewImageSetting[];
-}
-
-export interface Sticker {
-  id: string;
-  src: string;
-  x: number;
-  y: number;
-  width: number;
-  height: number;
+  image: HTMLImageElement;
+  appPreviewImageSettings?: ImageSetting[];
 }
 
 @Injectable({
@@ -42,6 +35,23 @@ export class CanvasService {
     return setCanvasSize(canvas, image);
   }
 
+  createImageUrl(canvas: HTMLCanvasElement): Promise<string> | string {
+    if (canvas) {
+      return new Promise<string>((resolve, reject) => {
+        canvas.toBlob((blob) => {
+          if (blob) {
+            resolve(URL.createObjectURL(blob));
+          } else {
+            reject('Blob creation failed');
+          }
+        });
+      });
+    } else {
+      console.error('Canvas element is not available. Exiting createImageUrl');
+      return '';
+    }
+  }
+
   drawElement({
     ctx,
     image,
@@ -53,68 +63,7 @@ export class CanvasService {
     ctx.drawImage(image, x, y, width, height);
   }
 
-  async loadImageAndStickers(
-    canvas: HTMLCanvasElement,
-    finalImage: string,
-    stickers: Sticker[],
-  ): Promise<void> {
-    const ctx = canvas.getContext('2d');
-
-    if (!ctx || !finalImage) {
-      return;
-    }
-
-    try {
-      const imageSources = [
-        finalImage,
-        ...stickers.map((sticker) => sticker.src),
-      ];
-
-      const images = await Promise.all(
-        imageSources.map((imageUrl) => loadImage(imageUrl)),
-      );
-
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      const mainImage = images[0];
-
-      if (mainImage) {
-        const { width, height } = this.setCanvasSize(canvas, mainImage);
-
-        ctx.imageSmoothingEnabled = false;
-        ctx.imageSmoothingQuality = 'high';
-        this.drawElement({
-          ctx,
-          image: mainImage,
-          x: 0,
-          y: 0,
-          width,
-          height,
-        });
-      }
-
-      stickers.forEach((sticker, index) => {
-        const stickerImage = images[index + 1];
-        if (stickerImage) {
-          ctx.drawImage(
-            stickerImage,
-            sticker.x,
-            sticker.y,
-            sticker.width,
-            sticker.height,
-          );
-        }
-      });
-    } catch (error) {
-      console.error('Error loading image and stickers', error);
-    }
-  }
-
-  drawImage({
-    canvas,
-    previewImage,
-    appPreviewImageSettings,
-  }: DrawImageParameters) {
+  drawImage({ canvas, image, appPreviewImageSettings }: DrawImageParameters) {
     const ctx = canvas.getContext('2d');
 
     if (!ctx) {
@@ -124,7 +73,7 @@ export class CanvasService {
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    const { width, height } = setCanvasSize(canvas, previewImage);
+    const { width, height } = setCanvasSize(canvas, image);
 
     ctx.imageSmoothingEnabled = false;
     ctx.imageSmoothingQuality = 'high';
@@ -135,11 +84,78 @@ export class CanvasService {
 
     this.drawElement({
       ctx,
-      image: previewImage,
+      image,
       x: 0,
       y: 0,
       width: width,
       height: height,
+    });
+  }
+
+  async loadStickers(stickers: CategoryOption[]): Promise<LoadedSticker[]> {
+    try {
+      const loadedStickers = await Promise.all(
+        stickers.map(async (sticker) => {
+          if (sticker.src) {
+            const image = await loadImage(sticker.src);
+            return { ...sticker, image };
+          } else {
+            throw new Error('Sticker source is undefined');
+          }
+        }),
+      );
+
+      return loadedStickers;
+    } catch (error) {
+      console.error('Error loading image and stickers', error);
+      return [];
+    }
+  }
+
+  drawImageAndStickers({
+    canvas,
+    mainImage,
+    stickers,
+    selectedStickers,
+  }: {
+    canvas: HTMLCanvasElement;
+    mainImage: HTMLImageElement;
+    stickers: LoadedSticker[];
+    selectedStickers: SelectedSticker[];
+  }) {
+    const ctx = canvas.getContext('2d');
+
+    if (!ctx) {
+      console.error(
+        'Canvas context is not available. Exiting drawImagesAndStickers',
+      );
+      return;
+    }
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    if (mainImage) {
+      this.drawImage({
+        canvas: canvas,
+        image: mainImage,
+      });
+    }
+
+    selectedStickers.forEach((selectedSticker) => {
+      const stickerImage = stickers.find(
+        (sticker) => sticker.name === selectedSticker.name,
+      )?.image;
+
+      if (stickerImage) {
+        this.drawElement({
+          ctx,
+          image: stickerImage,
+          x: selectedSticker.x,
+          y: selectedSticker.y,
+          width: selectedSticker.width,
+          height: selectedSticker.height,
+        });
+      }
     });
   }
 }
