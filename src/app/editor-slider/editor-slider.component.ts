@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { PreviewImageSetting } from '../directives/previewImage.directive';
 import { SaveCloseButtonGroupComponent } from '../save-close-button-group/save-close-button-group.component';
+import { ImageSetting } from '../model/image';
 
 @Component({
   selector: 'app-editor-slider',
@@ -20,7 +20,7 @@ export class EditorSliderComponent {
   closeSlider = new EventEmitter();
 
   @Input()
-  selectedPreviewImageOptions!: PreviewImageSetting;
+  selectedPreviewImageOptions!: ImageSetting;
 
   onValueChange(event: Event) {
     if (event.target) {

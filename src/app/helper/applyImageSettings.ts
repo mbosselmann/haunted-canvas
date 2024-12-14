@@ -1,8 +1,8 @@
-import { PreviewImageSetting } from '../directives/previewImage.directive';
+import { ImageSetting } from '../model/image';
 
 export function applyImageSettings(
   ctx: CanvasRenderingContext2D,
-  appPreviewImageSettings: PreviewImageSetting[],
+  appPreviewImageSettings: ImageSetting[],
 ) {
   const filters = appPreviewImageSettings
     .map((setting) => {
