@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ImageSetting } from '../../model/image';
 import { SaveCloseButtonGroupComponent } from '../save-close-button-group/save-close-button-group.component';
-import { ImageSetting } from '../model/image';
 
 @Component({
   selector: 'app-editor-slider',

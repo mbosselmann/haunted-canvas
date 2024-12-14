@@ -1,14 +1,14 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { categoryOptions } from '../../data/categoryOptions';
+import { ActiveDirective } from '../../directives/active.directive';
 import {
-  Categories,
   CategoryOptions,
   SelectedCategory,
-} from '../model/category';
-import { categoryOptions } from '../data/categoryOptions';
+  Categories,
+} from '../../model/category';
+import { ImageSetting } from '../../model/image';
 import { EditorSliderComponent } from '../editor-slider/editor-slider.component';
-import { ActiveDirective } from '../directives/active.directive';
-import { CommonModule } from '@angular/common';
-import { ImageSetting } from '../model/image';
 
 @Component({
   selector: 'app-editor-controls',

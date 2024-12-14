@@ -7,16 +7,16 @@ import {
   ChangeDetectorRef,
   AfterViewInit,
 } from '@angular/core';
+import { loadImage } from '../../helper/loadImage';
+import { CanvasService } from '../../services/canvas.service';
+import { categoryOptions } from '../../data/categoryOptions';
+import { LoadedSticker, SelectedSticker } from '../../model/sticker';
+import { ImageSetting } from '../../model/image';
+import { Categories, SelectedCategory } from '../../model/category';
+import { ButtonComponent } from '../button/button.component';
 import { CanvasComponent } from '../canvas/canvas.component';
 import { EditorControlsComponent } from '../editor-controls/editor-controls.component';
 import { ImageUploadComponent } from '../image-upload-form/image-upload-form.component';
-import { ButtonComponent } from '../button/button.component';
-import { loadImage } from '../helper/loadImage';
-import { CanvasService } from '../services/canvas.service';
-import { categoryOptions } from '../data/categoryOptions';
-import { LoadedSticker, SelectedSticker } from '../model/sticker';
-import { ImageSetting } from '../model/image';
-import { Categories, SelectedCategory } from '../model/category';
 
 @Component({
   selector: 'app-editor',

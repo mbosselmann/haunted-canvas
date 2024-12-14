@@ -1,8 +1,9 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
-import { LoadedSticker, SelectedSticker } from '../model/sticker';
-import { ImageDirective } from '../directives/image.directive';
-import { ImageSetting } from '../model/image';
-import { SelectedCategory } from '../model/category';
+import { ImageDirective } from '../../directives/image.directive';
+import { SelectedCategory } from '../../model/category';
+import { ImageSetting } from '../../model/image';
+import { LoadedSticker, SelectedSticker } from '../../model/sticker';
+
 @Component({
   selector: 'app-editor-canvas',
   standalone: true,
