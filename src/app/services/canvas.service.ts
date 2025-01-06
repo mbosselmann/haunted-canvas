@@ -6,6 +6,7 @@ import { CategoryOption } from '../model/category';
 import { LoadedSticker, SelectedSticker } from '../model/sticker';
 import { ImageSetting } from '../model/image';
 import { handleMouseEvents } from '../helper/mouseevents';
+import { handleTouchEvents } from '../helper/touchevents';
 interface DrawElementParameters {
   ctx: CanvasRenderingContext2D;
   image: HTMLImageElement;
@@ -166,6 +167,27 @@ export class CanvasService {
     selectedStickers: SelectedSticker[],
   ) {
     const updatedStickers = handleMouseEvents(
+      canvas,
+      selectedStickers,
+      (updatedStickers) =>
+        this.drawImageAndStickers({
+          canvas,
+          mainImage,
+          stickers,
+          selectedStickers: updatedStickers,
+        }),
+    );
+
+    return updatedStickers;
+  }
+
+  touchEventsListener(
+    canvas: HTMLCanvasElement,
+    mainImage: HTMLImageElement,
+    stickers: LoadedSticker[],
+    selectedStickers: SelectedSticker[],
+  ) {
+    const updatedStickers = handleTouchEvents(
       canvas,
       selectedStickers,
       (updatedStickers) =>

@@ -65,6 +65,13 @@ export class ImageDirective implements AfterViewInit, OnChanges {
         this.selectedStickers,
       );
 
+      this.selectedStickers = this.canvasService.touchEventsListener(
+        this.canvasElement.nativeElement,
+        this.finalImage,
+        this.stickers,
+        this.selectedStickers,
+      );
+
       this.canvasService.drawImageAndStickers({
         canvas: this.canvasElement.nativeElement,
         mainImage: this.finalImage,
