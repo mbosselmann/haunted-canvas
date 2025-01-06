@@ -121,6 +121,7 @@ export class EditorComponent implements AfterViewChecked, AfterViewInit {
         y: this.canvasElement.height / 2 - 100,
         width: 200,
         height: 200,
+        isDragging: false,
       },
     ];
   }

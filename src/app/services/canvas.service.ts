@@ -5,7 +5,7 @@ import { applyImageSettings } from '../helper/applyImageSettings';
 import { CategoryOption } from '../model/category';
 import { LoadedSticker, SelectedSticker } from '../model/sticker';
 import { ImageSetting } from '../model/image';
-
+import { handleMouseEvents } from '../helper/mouseevents';
 interface DrawElementParameters {
   ctx: CanvasRenderingContext2D;
   image: HTMLImageElement;
@@ -157,5 +157,26 @@ export class CanvasService {
         });
       }
     });
+  }
+
+  mouseEventsListener(
+    canvas: HTMLCanvasElement,
+    mainImage: HTMLImageElement,
+    stickers: LoadedSticker[],
+    selectedStickers: SelectedSticker[],
+  ) {
+    const updatedStickers = handleMouseEvents(
+      canvas,
+      selectedStickers,
+      (updatedStickers) =>
+        this.drawImageAndStickers({
+          canvas,
+          mainImage,
+          stickers,
+          selectedStickers: updatedStickers,
+        }),
+    );
+
+    return updatedStickers;
   }
 }

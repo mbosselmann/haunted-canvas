@@ -7,6 +7,7 @@ export interface SelectedSticker {
   y: number;
   width: number;
   height: number;
+  isDragging: boolean;
 }
 
 export interface LoadedSticker extends CategoryOption {

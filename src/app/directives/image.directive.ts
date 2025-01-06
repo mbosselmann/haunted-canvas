@@ -58,6 +58,13 @@ export class ImageDirective implements AfterViewInit, OnChanges {
     }
 
     if (changes['finalImage'] || changes['selectedStickers']) {
+      this.selectedStickers = this.canvasService.mouseEventsListener(
+        this.canvasElement.nativeElement,
+        this.finalImage,
+        this.stickers,
+        this.selectedStickers,
+      );
+
       this.canvasService.drawImageAndStickers({
         canvas: this.canvasElement.nativeElement,
         mainImage: this.finalImage,
