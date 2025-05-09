@@ -39,8 +39,8 @@ export function handleTouchEvents(
       const dx = currentX - startX;
       const dy = currentY - startY;
 
-      updatedStickers[0].x += parseInt(String(dx)) * 3;
-      updatedStickers[0].y += parseInt(String(dy)) * 3;
+      updatedStickers[updatedStickers.length - 1].x += parseInt(String(dx)) * 3;
+      updatedStickers[updatedStickers.length - 1].y += parseInt(String(dy)) * 3;
 
       startX = currentX;
       startY = currentY;

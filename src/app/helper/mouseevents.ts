@@ -12,36 +12,34 @@ export function handleMouseEvents(
   canvas.onmouseup = mouseUp;
 
   let isDragging = false;
-  let startX = 0;
-  let startY = 0;
+  let clientX = 0;
+  let clientY = 0;
+  let selectedStickerIndex = -1;
 
   function mouseDown(event: MouseEvent) {
     event.preventDefault();
     event.stopPropagation();
 
-    isDragging = true;
-    const rect = canvas.getBoundingClientRect();
-    startX = event.clientX - rect.left;
-    startY = event.clientY - rect.top;
+    selectedStickerIndex = 0;
+
+    if (selectedStickerIndex !== -1) {
+      isDragging = true;
+    }
   }
 
   function mouseMove(event: MouseEvent) {
     event.preventDefault();
     event.stopPropagation();
+    if (isDragging && selectedStickerIndex !== -1) {
+      const dx = clientX ? event.clientX - clientX : 0;
+      const dy = clientY ? event.clientY - clientY : 0;
 
-    if (isDragging) {
-      const rect = canvas.getBoundingClientRect();
-      const currentX = event.clientX - rect.left;
-      const currentY = event.clientY - rect.top;
+      updatedStickers[selectedStickerIndex].x += dx * 3;
+      updatedStickers[selectedStickerIndex].y += dy * 3;
 
-      const dx = currentX - startX;
-      const dy = currentY - startY;
+      clientX = event.clientX;
+      clientY = event.clientY;
 
-      updatedStickers[0].x += parseInt(String(dx)) * 3;
-      updatedStickers[0].y += parseInt(String(dy)) * 3;
-
-      startX = currentX;
-      startY = currentY;
       redrawCanvas(updatedStickers);
     }
   }
@@ -51,6 +49,7 @@ export function handleMouseEvents(
     event.stopPropagation();
 
     isDragging = false;
+    selectedStickerIndex = -1;
   }
 
   return updatedStickers;

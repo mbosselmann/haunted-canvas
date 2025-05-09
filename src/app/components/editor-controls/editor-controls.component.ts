@@ -20,6 +20,7 @@ import { EditorSliderComponent } from '../editor-slider/editor-slider.component'
 export class EditorControlsComponent {
   selectedPreviewImageOptions: ImageSetting | null = null;
   categoryOptions: CategoryOptions = categoryOptions;
+  isStickerSelected = false;
 
   @Input()
   selectedCategory: SelectedCategory = 'settings';
@@ -65,6 +66,7 @@ export class EditorControlsComponent {
     this.selectedCategory = this.selectedCategory === category ? '' : category;
     this.selectedPreviewImageOptions = null;
     this.categoryChange.emit(this.selectedCategory);
+    this.isStickerSelected = false;
   }
 
   onSelectOption(option: string) {
@@ -99,6 +101,8 @@ export class EditorControlsComponent {
           name: stickerName,
         });
       }
+
+      this.isStickerSelected = true;
     }
 
     if (this.selectedCategory === 'save') {

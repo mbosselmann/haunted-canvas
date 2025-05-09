@@ -6,8 +6,21 @@
       [selectedPreviewImageOptions]="selectedPreviewImageOptions!"
     />
   }
+
+  @if (isStickerSelected && selectedCategory === "stickers") {
+    <button
+      type="button"
+      class="editor-controls-button option-button"
+      (click)="onSelectOption('delete')"
+    >
+      <img class="option-image" src="/assets/delete-icon.svg" alt="delete" />
+    </button>
+  }
   @if (
-    (isImageChosen && selectedCategory && !selectedPreviewImageOptions) ||
+    (!isStickerSelected &&
+      isImageChosen &&
+      selectedCategory &&
+      !selectedPreviewImageOptions) ||
     selectedPreviewImageOptions?.type === "save"
   ) {
     @for (option of categoryOptions[selectedCategory]; track option.id) {
