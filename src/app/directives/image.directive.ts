@@ -30,6 +30,9 @@ export class ImageDirective implements AfterViewInit, OnChanges {
   @Input()
   previewImage!: HTMLImageElement;
 
+  @Input()
+  isStickerSelected = false;
+
   constructor(
     private canvasElement: ElementRef<HTMLCanvasElement>,
     private canvasService: CanvasService,
@@ -63,6 +66,7 @@ export class ImageDirective implements AfterViewInit, OnChanges {
         this.finalImage,
         this.stickers,
         this.selectedStickers,
+        this.isStickerSelected,
       );
 
       this.selectedStickers = this.canvasService.touchEventsListener(

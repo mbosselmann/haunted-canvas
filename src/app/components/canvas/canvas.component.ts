@@ -30,6 +30,9 @@ export class CanvasComponent {
   @Input()
   selectedStickers!: SelectedSticker[];
 
+  @Input()
+  isStickerSelected = true;
+
   @ViewChild('styleCanvas', { static: false })
   styleCanvas!: ElementRef<HTMLCanvasElement>;
   @ViewChild('finalCanvas', { static: false })

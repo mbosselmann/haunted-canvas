@@ -18,6 +18,7 @@
     [appPreviewImageSettings]="appPreviewImageSettings"
     [selectedCategory]="selectedCategory"
     [finalImage]="finalImage!"
+    [isStickerSelected]="isStickerSelected"
   />
 } @else {
   <app-image-upload (setPreviewImage)="setPreviewImage($event)" />
@@ -28,4 +29,6 @@
   [isImageChosen]="!!previewImage || !!finalImage"
   (selectedStickerChange)="onSelectedStickerChange($event)"
   (categoryChange)="onCategoryChange($event)"
+  [isStickerSelected]="isStickerSelected"
+  (isStickerSelectedChange)="onIsStickerSelectedChange($event)"
 />

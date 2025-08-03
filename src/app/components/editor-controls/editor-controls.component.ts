@@ -9,18 +9,24 @@ import {
 } from '../../model/category';
 import { ImageSetting } from '../../model/image';
 import { EditorSliderComponent } from '../editor-slider/editor-slider.component';
+import { SaveCloseButtonGroupComponent } from '../save-close-button-group/save-close-button-group.component';
+import { SelectedSticker } from '../../model/sticker';
 
 @Component({
   selector: 'app-editor-controls',
   standalone: true,
-  imports: [EditorSliderComponent, ActiveDirective, CommonModule],
+  imports: [
+    EditorSliderComponent,
+    ActiveDirective,
+    CommonModule,
+    SaveCloseButtonGroupComponent,
+  ],
   templateUrl: './editor-controls.component.html',
   styleUrl: './editor-controls.component.css',
 })
 export class EditorControlsComponent {
   selectedPreviewImageOptions: ImageSetting | null = null;
   categoryOptions: CategoryOptions = categoryOptions;
-  isStickerSelected = false;
 
   @Input()
   selectedCategory: SelectedCategory = 'settings';
@@ -34,6 +40,9 @@ export class EditorControlsComponent {
   @Input()
   canvasElement!: HTMLCanvasElement;
 
+  @Input()
+  isStickerSelected = false;
+
   @Output()
   sliderValueChange = new EventEmitter<ImageSetting>();
 
@@ -42,6 +51,15 @@ export class EditorControlsComponent {
 
   @Output()
   categoryChange = new EventEmitter<SelectedCategory>();
+
+  @Output()
+  updatedSelectedSticker = new EventEmitter<SelectedSticker>();
+
+  @Output()
+  selectedStickerDelete = new EventEmitter<SelectedSticker>();
+
+  @Output()
+  isStickerSelectedChange = new EventEmitter<boolean>();
 
   onSliderValueChange(value: number) {
     if (
@@ -66,7 +84,7 @@ export class EditorControlsComponent {
     this.selectedCategory = this.selectedCategory === category ? '' : category;
     this.selectedPreviewImageOptions = null;
     this.categoryChange.emit(this.selectedCategory);
-    this.isStickerSelected = false;
+    this.isStickerSelectedChange.emit(false);
   }
 
   onSelectOption(option: string) {
@@ -101,8 +119,6 @@ export class EditorControlsComponent {
           name: stickerName,
         });
       }
-
-      this.isStickerSelected = true;
     }
 
     if (this.selectedCategory === 'save') {
@@ -128,5 +144,15 @@ export class EditorControlsComponent {
 
   onCloseSlider() {
     this.selectedPreviewImageOptions = null;
+  }
+
+  onClose(type: string) {
+    if (type === 'close') {
+      this.isStickerSelectedChange.emit(false);
+    }
+
+    if (type === 'save') {
+      this.isStickerSelectedChange.emit(false);
+    }
   }
 }

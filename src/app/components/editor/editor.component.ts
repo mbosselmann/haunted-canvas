@@ -41,6 +41,7 @@ export class EditorComponent implements AfterViewChecked, AfterViewInit {
   appPreviewImageSettings: ImageSetting[] = [];
   stickers: LoadedSticker[] = [];
   selectedStickers: SelectedSticker[] = [];
+  isStickerSelected = false;
 
   @Output()
   closeEditor = new EventEmitter<boolean>();
@@ -132,5 +133,9 @@ export class EditorComponent implements AfterViewChecked, AfterViewInit {
       this.canvasElement,
     );
     this.finalImage = await this.canvasService.loadImage(imageUrl);
+  }
+
+  onIsStickerSelectedChange(isStickerSelected: boolean) {
+    this.isStickerSelected = isStickerSelected;
   }
 }
