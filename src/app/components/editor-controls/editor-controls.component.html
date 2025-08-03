@@ -15,6 +15,7 @@
     >
       <img class="option-image" src="/assets/delete-icon.svg" alt="delete" />
     </button>
+    <app-save-close-button-group (close)="onClose($event)" />
   }
   @if (
     (!isStickerSelected &&
@@ -40,7 +41,7 @@
   }
 </div>
 <div class="editor-controls-section">
-  @if (isImageChosen && !selectedPreviewImageOptions) {
+  @if (isImageChosen && !selectedPreviewImageOptions && !isStickerSelected) {
     @for (category of categories; track category) {
       <button
         type="button"
