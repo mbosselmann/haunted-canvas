@@ -3,6 +3,7 @@ import { SelectedSticker } from '../model/sticker';
 export function handleMouseEvents(
   canvas: HTMLCanvasElement,
   stickers: SelectedSticker[],
+  selectedStickerIndex: number,
   redrawCanvas: (updatedStickers: SelectedSticker[]) => void,
 ) {
   const updatedStickers = [...stickers];
@@ -14,15 +15,15 @@ export function handleMouseEvents(
   let isDragging = false;
   let clientX = 0;
   let clientY = 0;
-  let selectedStickerIndex = -1;
+  let stickerIndex = -1;
 
   function mouseDown(event: MouseEvent) {
     event.preventDefault();
     event.stopPropagation();
 
-    selectedStickerIndex = 0;
+    stickerIndex = selectedStickerIndex;
 
-    if (selectedStickerIndex !== -1) {
+    if (stickerIndex !== -1) {
       isDragging = true;
     }
   }
@@ -49,7 +50,8 @@ export function handleMouseEvents(
     event.stopPropagation();
 
     isDragging = false;
-    selectedStickerIndex = -1;
+    stickerIndex = -1;
+    redrawCanvas(updatedStickers);
   }
 
   return updatedStickers;

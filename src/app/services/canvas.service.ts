@@ -165,20 +165,27 @@ export class CanvasService {
     mainImage: HTMLImageElement,
     stickers: LoadedSticker[],
     selectedStickers: SelectedSticker[],
+    isStickerSelected: boolean,
   ) {
-    const updatedStickers = handleMouseEvents(
-      canvas,
-      selectedStickers,
-      (updatedStickers) =>
-        this.drawImageAndStickers({
-          canvas,
-          mainImage,
-          stickers,
-          selectedStickers: updatedStickers,
-        }),
-    );
-
-    return updatedStickers;
+    if (isStickerSelected) {
+      canvas.style.cursor = 'pointer';
+      const updatedStickers = handleMouseEvents(
+        canvas,
+        selectedStickers,
+        selectedStickers.length - 1,
+        (updatedStickers) =>
+          this.drawImageAndStickers({
+            canvas,
+            mainImage,
+            stickers,
+            selectedStickers: updatedStickers,
+          }),
+      );
+      return updatedStickers;
+    } else {
+      canvas.style.cursor = 'default';
+    }
+    return selectedStickers;
   }
 
   touchEventsListener(
